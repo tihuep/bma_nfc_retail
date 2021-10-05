@@ -1,0 +1,11 @@
+{
+  "name": "nfc_retail_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sven Jaeger, Timon Hueppi",
+  "license": "ISC"
+}
