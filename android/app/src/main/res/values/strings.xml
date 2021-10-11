@@ -5,4 +5,13 @@
     <string name="login_pw_label">Passwort</string>
     <string name="login_button">Login</string>
     <string name="login_register_button">Registrieren</string>
+
+    <string name="register_back">Zurück</string>
+    <string name="register_title">Registrieren</string>
+    <string name="register_email_label">Email</string>
+    <string name="register_firstname_label">Vorname</string>
+    <string name="register_lastname_label">Nachname</string>
+    <string name="register_PW_label">Passwort</string>
+    <string name="register_PW_confirm_label">Passwort bestätigen</string>
+    <string name="register_button">Registrieren</string>
 </resources>

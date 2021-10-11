@@ -2,6 +2,7 @@ package ch.bmz.bma.nfc_retail_android.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 
 import ch.bmz.bma.nfc_retail_android.R;
 
+/**
+ * author: Timon Hueppi
+ * date: 2021/10/11
+ */
 public class LoginActivity extends AppCompatActivity {
 
     TextView loginTitle;
@@ -42,20 +47,32 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void defineButtonHandlers() {
+        LoginActivity that = this;
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //check credentials
                 /*Intent intent = new Intent(this, PurchaseActivity.class);
-                startActivity(intent);*/
+                startActivity(intent);
+                finish()*/
             }
         });
-
         loginRegisterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*Intent intent = new Intent(this, RegisterActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(that, RegisterActivity.class);
+                startActivityForResult(intent, 1);
+
+
             }
         });
+    }
+
+    //https://stackoverflow.com/questions/41194680/close-another-activity-from-current-one/41195489
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            finish();
+        }
     }
 
     public void displayError(String message) {
