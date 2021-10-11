@@ -14,4 +14,14 @@
     <string name="register_PW_label">Passwort</string>
     <string name="register_PW_confirm_label">Passwort bestätigen</string>
     <string name="register_button">Registrieren</string>
+
+    <string name="purchase_title">Einkauf</string>
+    <string name="purchase_profile_label">Profil</string>
+    <string name="purchase_change_pw_label">Passwort ändern</string>
+    <string name="purchase_mypurchases_label">Meine Einkäufe</string>
+    <string name="purchase_logout_label">Abmelden</string>
+    <string name="purchase_pay">Bezahlen</string>
+
+
+    <string name="article_delete">Löschen</string>
 </resources>

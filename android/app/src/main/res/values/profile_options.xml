@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="profile_options_array">
+        <item>@string/purchase_profile_label</item>
+        <item>@string/purchase_change_pw_label</item>
+        <item>@string/purchase_mypurchases_label</item>
+        <item>@string/purchase_logout_label</item>
+    </string-array>
+</resources>
