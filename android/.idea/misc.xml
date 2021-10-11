@@ -6,6 +6,8 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.7327898550724637" />
         <entry key="app/src/main/res/layout/activity_purchase.xml" value="0.4450354609929078" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/article_list_item.xml" value="0.5344202898550725" />
+        <entry key="app/src/main/res/layout/article_list_item_deletable.xml" value="0.5344202898550725" />
       </map>
     </option>
   </component>
