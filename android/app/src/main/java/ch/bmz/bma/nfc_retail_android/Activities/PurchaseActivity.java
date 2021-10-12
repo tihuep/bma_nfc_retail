@@ -127,9 +127,9 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 break;
             case 3:
                 //TODO
-                /*intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
-                finish();*/
+                finish();
                 purchaseProfileSpinner.setSelection(0);
                 break;
         }
