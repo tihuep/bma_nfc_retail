@@ -83,9 +83,13 @@ public class MyPurchasesActivity extends AppCompatActivity {
         MyPurchasesActivity that = this;
         purchaseItemSelect.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {/*
+            public void onClick(View v) {
                 Intent intent = new Intent(that, ShowPurchaseActivity.class);
-                startActivity(intent);*/
+                intent.putExtra("id", id);
+                intent.putExtra("date", date);
+                intent.putExtra("currency", currency);
+                intent.putExtra("total", total);
+                startActivity(intent);
             }
         });
 

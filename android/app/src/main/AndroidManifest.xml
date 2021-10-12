@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activities.ShowPurchaseActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.MyPurchasesActivity"
             android:exported="true" />
         <activity

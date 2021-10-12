@@ -34,4 +34,9 @@
     <string name="my_purchases_back">Zurück</string>
     <string name="my_purchases_title">Meine Einkäufe</string>
 
+    <string name="show_purchase_back">Zurück</string>
+    <string name="show_purchase_title">Einkauf</string>
+    <string name="show_purchase_total_label">Total</string>
+
+
 </resources>

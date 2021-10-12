@@ -1,27 +1,21 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,39 +47,39 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         defineButtonHandlers();
         populateSpinner();
 
-        addItem("01", 1, "evian", "1.69");
-        addItem("02", 1, "airwaves", "2.10");
-        addItem("03", 1, "fishermans friend", "4.20");
-        addItem("04", 1, "evian", "1.69");
-        addItem("05", 1, "evian", "1.69");
-        addItem("06", 1, "evian", "1.69");
-        addItem("07", 1, "evian", "1.69");
-        addItem("08", 1, "evian", "1.69");
-        addItem("09", 1, "evian", "1.69");
-        addItem("10", 1, "evian", "1.69");
-        addItem("11", 1, "evian", "1.69");
-        addItem("12", 1, "evian", "1.69");
-        addItem("13", 1, "evian", "1.69");
-        addItem("14", 1, "evian", "1.69");
-        addItem("15", 1, "evian", "1.69");
-        addItem("16", 1, "evian", "1.69");
-        addItem("17", 1, "evian", "1.69");
-        addItem("18", 1, "evian", "1.69");
-        addItem("19", 1, "evian", "1.69");
-        addItem("20", 1, "evian", "1.69");
-        addItem("21", 1, "evian", "1.69");
-        addItem("22", 1, "evian", "1.69");
-        addItem("23", 1, "evian", "1.69");
-        addItem("24", 1, "evian", "1.69");
-        addItem("25", 1, "evian", "1.69");
-        addItem("26", 1, "evian", "1.69");
-        addItem("27", 1, "evian", "1.69");
-        addItem("28", 1, "evian", "1.69");
-        addItem("29", 1, "evian", "1.69");
-        addItem("30", 1, "evian", "1.69");
-        addItem("31", 1, "evian", "1.69");
-        addItem("32", 1, "evian", "1.69");
-        addItem("33", 1, "evian", "1.69");
+        addItem("01", 1, "evian", 1.69f);
+        addItem("02", 1, "airwaves", 2.10f);
+        addItem("03", 1, "fishermans friend", 4.20f);
+        addItem("04", 1, "evian", 1.69f);
+        addItem("05", 1, "evian", 1.69f);
+        addItem("06", 1, "evian", 1.69f);
+        addItem("07", 1, "evian", 1.69f);
+        addItem("08", 1, "evian", 1.69f);
+        addItem("09", 1, "evian", 1.69f);
+        addItem("10", 1, "evian", 1.69f);
+        addItem("11", 1, "evian", 1.69f);
+        addItem("12", 1, "evian", 1.69f);
+        addItem("13", 1, "evian", 1.69f);
+        addItem("14", 1, "evian", 1.69f);
+        addItem("15", 1, "evian", 1.69f);
+        addItem("16", 1, "evian", 1.69f);
+        addItem("17", 1, "evian", 1.69f);
+        addItem("18", 1, "evian", 1.69f);
+        addItem("19", 1, "evian", 1.69f);
+        addItem("20", 1, "evian", 1.69f);
+        addItem("21", 1, "evian", 1.69f);
+        addItem("22", 1, "evian", 1.69f);
+        addItem("23", 1, "evian", 1.69f);
+        addItem("24", 1, "evian", 1.69f);
+        addItem("25", 1, "evian", 1.69f);
+        addItem("26", 1, "evian", 1.69f);
+        addItem("27", 1, "evian", 1.69f);
+        addItem("28", 1, "evian", 1.69f);
+        addItem("29", 1, "evian", 1.69f);
+        addItem("30", 1, "evian", 1.69f);
+        addItem("31", 1, "evian", 1.69f);
+        addItem("32", 1, "evian", 1.69f);
+        addItem("33", 1, "evian", 1.69f);
     }
 
     private void defineButtonHandlers() {
@@ -126,7 +120,6 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 3:
-                //TODO
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -163,23 +156,23 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchaseProfileSpinner.setAdapter(spinnerArrayAdapter);
     }
 
-    public void addItem(String id, Integer amount, String desc, String price) {
+    public void addItem(String id, Integer amount, String desc, Float price) {
         //https://stackoverflow.com/questions/9807650/dynamically-cloning-a-linearlayout-in-android
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
         View item =  layoutInflater.inflate(R.layout.article_list_item_deletable, null);
 
-        TextView articleItemAmount = item.findViewById(R.id.articleItemAmount);
+        TextView articleItemAmount = item.findViewById(R.id.articleItemDeletableAmount);
         articleItemAmount.setText(amount.toString() + " ");
 
-        TextView articleItemDesc = item.findViewById(R.id.articleItemDesc);
+        TextView articleItemDesc = item.findViewById(R.id.articleItemDeletableDesc);
         articleItemDesc.setText(desc);
 
-        TextView articleItemPrice = item.findViewById(R.id.articleItemPrice);
-        articleItemPrice.setText(price);
+        TextView articleItemPrice = item.findViewById(R.id.articleItemDeletablePrice);
+        articleItemPrice.setText("CHF " + price.toString());
 
         item.setContentDescription(id);
 
-        ImageButton articleItemDelete = item.findViewById(R.id.articleItemDelete);
+        ImageButton articleItemDelete = item.findViewById(R.id.articleItemDeletableDelete);
         articleItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
