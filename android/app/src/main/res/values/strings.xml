@@ -48,4 +48,8 @@
     <string name="payment_back">Zurück</string>
     <string name="payment_title">Bezahlen</string>
     <string name="payment_button">Bezahlen</string>
+
+    <string name="payment_confirm_title">Bezahlung erfolgreich</string>
+    <string name="payment_confirm_subtitle">Vielen Dank für Ihren Einkauf</string>
+    <string name="payment_confirm_button">Neuer Einkauf</string>
 </resources>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activities.PaymentConfirmActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.PaymentActivity"
             android:exported="true" />
         <activity

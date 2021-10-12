@@ -56,6 +56,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void defineButtonHandlers() {
+        PaymentActivity that = this;
         paymentBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,15 +68,27 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int checkedId = paymentOptions.getCheckedRadioButtonId();
-                System.out.println(options.get(checkedId - 1));
-
+                if (checkedId > 0) {
+                    hideError();
+                    Intent intent = new Intent(that, PaymentConfirmActivity.class);
+                    int optionID = (checkedId-1) % options.size();
+                    if (options.size() > optionID) {
+                        System.out.println(options.get(optionID));
+                        intent.putExtra("method", options.get(optionID));
+                    }
+                    //https://stackoverflow.com/questions/7075349/android-clear-activity-stack
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    displayError("Bitte Zahlmethode auswählen");
+                }
             }
         });
     }
 
     private void populateRadioButtons() {
-        for (String option :
-                options) {
+        for (String option : options) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
             View item =  layoutInflater.inflate(R.layout.payment_option, null);
 
@@ -85,5 +98,15 @@ public class PaymentActivity extends AppCompatActivity {
 
             paymentOptions.addView(item);
         }
+    }
+
+    public void displayError(String message) {
+        paymentError.setVisibility(View.VISIBLE);
+        paymentErrorLabel.setText(message);
+    }
+
+    public void hideError() {
+        paymentError.setVisibility(View.GONE);
+        paymentErrorLabel.setText("");
     }
 }

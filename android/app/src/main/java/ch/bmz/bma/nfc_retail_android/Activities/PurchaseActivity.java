@@ -47,12 +47,12 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
         defineButtonHandlers();
         populateSpinner();
-
+/*
         addItem("01", 1, "evian", 1.69f);
         addItem("02", 1, "airwaves", 2.10f);
         addItem("03", 1, "fishermans friend", 4.20f);
         addItem("04", 1, "evian", 1.69f);
-        addItem("05", 1, "evian", 1.69f);
+        addItem("05", 1, "evian", 1.69f);*/
     }
 
     private void defineButtonHandlers() {
