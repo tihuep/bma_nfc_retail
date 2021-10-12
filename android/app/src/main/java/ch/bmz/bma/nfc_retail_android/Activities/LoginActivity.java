@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         loginErrorLabel = findViewById(R.id.loginErrorLabel);
         loginRegisterButton = findViewById(R.id.loginRegisterButton);
 
+        loginError.setVisibility(View.GONE);
+
         defineButtonHandlers();
     }
 
@@ -50,18 +52,16 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity that = this;
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //check credentials
-                /*Intent intent = new Intent(this, PurchaseActivity.class);
+                //TODO: check credentials
+                Intent intent = new Intent(that, PurchaseActivity.class);
                 startActivity(intent);
-                finish()*/
+                finish();
             }
         });
         loginRegisterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(that, RegisterActivity.class);
                 startActivityForResult(intent, 1);
-
-
             }
         });
     }

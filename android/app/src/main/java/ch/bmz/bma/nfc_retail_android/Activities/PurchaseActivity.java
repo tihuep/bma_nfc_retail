@@ -92,6 +92,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchaseAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO
                 /*Intent intent = new Intent(this, ScanActivity.class);
                 startActivity(intent);*/
             }
@@ -100,6 +101,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchasePay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO
                 /*Intent intent = new Intent(this, PayActivity.class);
                 startActivity(intent);*/
             }
@@ -112,16 +114,18 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (pos) {
             case 1:
-                /*Intent intent = new Intent(this, ChangePWActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(this, ChangePWActivity.class);
+                startActivityForResult(intent, 1);
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 2:
+                //TODO
                 /*Intent intent = new Intent(this, MyPurchasesActivity.class);
                 startActivity(intent);*/
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 3:
+                //TODO
                 /*Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();*/

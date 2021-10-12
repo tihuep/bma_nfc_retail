@@ -22,6 +22,13 @@
     <string name="purchase_logout_label">Abmelden</string>
     <string name="purchase_pay">Bezahlen</string>
 
-
     <string name="article_delete">Löschen</string>
+
+    <string name="change_pw_back">Zurück</string>
+    <string name="change_pw_title">Passwort ändern</string>
+    <string name="change_pw_current_label">Aktuelles Passwort</string>
+    <string name="change_pw_new_label">Neues Passwort</string>
+    <string name="change_pw_new_conf_label">Neues Passwort bestätigen</string>
+    <string name="change_pw_button">Passwort ändern</string>
+
 </resources>

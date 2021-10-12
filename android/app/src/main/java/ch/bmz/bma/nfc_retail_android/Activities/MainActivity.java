@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO: implement activity switch
         //Intent intent = new Intent(this, LoginActivity.class);
         Intent intent = new Intent(this, PurchaseActivity.class);
         startActivity(intent);

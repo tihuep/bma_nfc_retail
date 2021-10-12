@@ -58,6 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerErrorLabel = findViewById(R.id.registerErrorLabel);
         registerButton = findViewById(R.id.registerButton);
 
+        registerError.setVisibility(View.GONE);
+
         defineButtonHandlers();
     }
 
@@ -75,10 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
                 if (validateForm()) {
                     hideError();
                     setResult(RESULT_OK, new Intent());
-                    /*Intent intent = new Intent(that, PurchaseActivity.class);
+                    Intent intent = new Intent(that, PurchaseActivity.class);
                     startActivity(intent);
-                    finish();*/
+                    finish();
                 }else {
+                    //TODO: implement proper error messages
                     displayError("Bitte die Felder korrekt ausfüllen");
                 }
             }
