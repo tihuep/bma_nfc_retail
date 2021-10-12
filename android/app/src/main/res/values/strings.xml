@@ -45,4 +45,7 @@
     <string name="scan_amount_label">Anzahl</string>
     <string name="scan_add">Hinzufügen</string>
 
+    <string name="payment_back">Zurück</string>
+    <string name="payment_title">Bezahlen</string>
+    <string name="payment_button">Bezahlen</string>
 </resources>

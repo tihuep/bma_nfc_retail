@@ -86,6 +86,7 @@ public class ScanActivity extends AppCompatActivity {
                 if (articleID != null && articleAmount != null && articleDesc != null && articlePrice != null
                         && !scanAmount.getText().toString().equals("") && Integer.valueOf(scanAmount.getText().toString()) > 0){
                     hideError();
+                    //https://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
                     getIntent().putExtra("id", articleID);
                     getIntent().putExtra("amount", Integer.valueOf(scanAmount.getText().toString()));
                     getIntent().putExtra("desc", articleDesc);

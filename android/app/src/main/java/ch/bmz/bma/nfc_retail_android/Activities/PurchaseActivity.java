@@ -68,13 +68,11 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchasePay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                /*Intent intent = new Intent(this, PayActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(that, PaymentActivity.class);
+                startActivity(intent);
             }
         });
         purchaseProfileSpinner.setOnItemSelectedListener(this);
-
     }
 
     //https://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
