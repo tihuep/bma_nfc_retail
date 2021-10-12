@@ -2,6 +2,7 @@ package ch.bmz.bma.nfc_retail_android.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,43 +53,15 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         addItem("03", 1, "fishermans friend", 4.20f);
         addItem("04", 1, "evian", 1.69f);
         addItem("05", 1, "evian", 1.69f);
-        addItem("06", 1, "evian", 1.69f);
-        addItem("07", 1, "evian", 1.69f);
-        addItem("08", 1, "evian", 1.69f);
-        addItem("09", 1, "evian", 1.69f);
-        addItem("10", 1, "evian", 1.69f);
-        addItem("11", 1, "evian", 1.69f);
-        addItem("12", 1, "evian", 1.69f);
-        addItem("13", 1, "evian", 1.69f);
-        addItem("14", 1, "evian", 1.69f);
-        addItem("15", 1, "evian", 1.69f);
-        addItem("16", 1, "evian", 1.69f);
-        addItem("17", 1, "evian", 1.69f);
-        addItem("18", 1, "evian", 1.69f);
-        addItem("19", 1, "evian", 1.69f);
-        addItem("20", 1, "evian", 1.69f);
-        addItem("21", 1, "evian", 1.69f);
-        addItem("22", 1, "evian", 1.69f);
-        addItem("23", 1, "evian", 1.69f);
-        addItem("24", 1, "evian", 1.69f);
-        addItem("25", 1, "evian", 1.69f);
-        addItem("26", 1, "evian", 1.69f);
-        addItem("27", 1, "evian", 1.69f);
-        addItem("28", 1, "evian", 1.69f);
-        addItem("29", 1, "evian", 1.69f);
-        addItem("30", 1, "evian", 1.69f);
-        addItem("31", 1, "evian", 1.69f);
-        addItem("32", 1, "evian", 1.69f);
-        addItem("33", 1, "evian", 1.69f);
     }
 
     private void defineButtonHandlers() {
+        PurchaseActivity that = this;
         purchaseAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                /*Intent intent = new Intent(this, ScanActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(that, ScanActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -104,17 +77,26 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
+    //https://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+            Bundle extras = intent.getExtras();
+            addItem(extras.getString("id"), extras.getInt("amount"), extras.getString("desc"), extras.getFloat("price"));
+        }
+    }
+
     //https://developer.android.com/guide/topics/ui/controls/spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         Intent intent;
         switch (pos) {
             case 1:
                 intent = new Intent(this, ChangePWActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 2:
-                //TODO
                 intent = new Intent(this, MyPurchasesActivity.class);
                 startActivity(intent);
                 purchaseProfileSpinner.setSelection(0);
