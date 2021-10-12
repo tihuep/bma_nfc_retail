@@ -5,10 +5,15 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -16,11 +21,15 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ch.bmz.bma.nfc_retail_android.R;
 
-public class PurchaseActivity extends AppCompatActivity {
+public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView purchaseTitle;
     Spinner purchaseProfileSpinner;
@@ -95,17 +104,58 @@ public class PurchaseActivity extends AppCompatActivity {
                 startActivity(intent);*/
             }
         });
+        purchaseProfileSpinner.setOnItemSelectedListener(this);
+
+    }
+
+    //https://developer.android.com/guide/topics/ui/controls/spinner
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        switch (pos) {
+            case 1:
+                /*Intent intent = new Intent(this, ChangePWActivity.class);
+                startActivity(intent);*/
+                purchaseProfileSpinner.setSelection(0);
+                break;
+            case 2:
+                /*Intent intent = new Intent(this, MyPurchasesActivity.class);
+                startActivity(intent);*/
+                purchaseProfileSpinner.setSelection(0);
+                break;
+            case 3:
+                /*Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();*/
+                purchaseProfileSpinner.setSelection(0);
+                break;
+        }
+    }
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
     private void populateSpinner() {
-        //https://developer.android.com/guide/topics/ui/controls/spinner
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.profile_options_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        purchaseProfileSpinner.setAdapter(adapter);
+        //https://stackoverflow.com/questions/5178588/how-we-can-get-the-arraylistboth-string-and-integer-from-the-resources-xml
+        List<String> profileOptions = Arrays.asList(getResources().getStringArray(R.array.profile_options_array));
+
+        //https://android--code.blogspot.com/2015/08/android-spinner-disable-item.html
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this, R.layout.profile_spinner_item, profileOptions){
+            @Override
+            public boolean isEnabled(int position){
+                return position != 0;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                if(position == 0)
+                    view.setVisibility(View.GONE);
+                return view;
+            }
+        };
+
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.profile_spinner_item);
+        purchaseProfileSpinner.setAdapter(spinnerArrayAdapter);
     }
 
     public void addItem(String id, Integer amount, String desc, String price) {
