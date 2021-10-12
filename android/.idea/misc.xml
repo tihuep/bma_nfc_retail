@@ -5,11 +5,13 @@
       <map>
         <entry key="app/src/main/res/layout/activity_change_pw.xml" value="0.3763924592973436" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.7327898550724637" />
+        <entry key="app/src/main/res/layout/activity_my_purchases.xml" value="0.3763924592973436" />
         <entry key="app/src/main/res/layout/activity_purchase.xml" value="0.4450354609929078" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.67" />
         <entry key="app/src/main/res/layout/article_list_item.xml" value="0.5344202898550725" />
         <entry key="app/src/main/res/layout/article_list_item_deletable.xml" value="0.5344202898550725" />
         <entry key="app/src/main/res/layout/profile_spinner_item.xml" value="0.3138389031705227" />
+        <entry key="app/src/main/res/layout/purchase_list_item_selectable.xml" value="0.5548007246376812" />
       </map>
     </option>
   </component>

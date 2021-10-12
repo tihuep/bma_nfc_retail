@@ -112,21 +112,22 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
     //https://developer.android.com/guide/topics/ui/controls/spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        Intent intent;
         switch (pos) {
             case 1:
-                Intent intent = new Intent(this, ChangePWActivity.class);
+                intent = new Intent(this, ChangePWActivity.class);
                 startActivityForResult(intent, 1);
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 2:
                 //TODO
-                /*Intent intent = new Intent(this, MyPurchasesActivity.class);
-                startActivity(intent);*/
+                intent = new Intent(this, MyPurchasesActivity.class);
+                startActivity(intent);
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 3:
                 //TODO
-                /*Intent intent = new Intent(this, LoginActivity.class);
+                /*intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();*/
                 purchaseProfileSpinner.setSelection(0);

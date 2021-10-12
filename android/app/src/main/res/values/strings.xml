@@ -31,4 +31,7 @@
     <string name="change_pw_new_conf_label">Neues Passwort bestätigen</string>
     <string name="change_pw_button">Passwort ändern</string>
 
+    <string name="my_purchases_back">Zurück</string>
+    <string name="my_purchases_title">Meine Einkäufe</string>
+
 </resources>
