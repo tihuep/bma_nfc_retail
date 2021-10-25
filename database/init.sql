@@ -17,7 +17,7 @@ CREATE TABLE purchase
     id      varchar(100) not null,
     user_id varchar(100) not null,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user (id)
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 CREATE TABLE article
@@ -34,8 +34,8 @@ CREATE TABLE article_purchase
     amount      integer      not null,
     purchase_id varchar(100) not null,
     article_id  varchar(100) not null,
-    FOREIGN KEY (purchase_id) REFERENCES purchase (id),
-    FOREIGN KEY (article_id) REFERENCES article (id)
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id) ON DELETE CASCADE,
+    FOREIGN KEY (article_id) REFERENCES article (id) ON DELETE CASCADE
 );
 
 CREATE TABLE payment_method
@@ -53,6 +53,6 @@ CREATE TABLE payment
     confirmed   boolean      not null default false,
     purchase_id varchar(100) not null,
     PRIMARY KEY (id),
-    FOREIGN KEY (purchase_id) REFERENCES purchase (id)
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id) ON DELETE CASCADE
 );
 
