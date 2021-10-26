@@ -30,7 +30,6 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
     Spinner purchaseProfileSpinner;
     ScrollView purchaseItemsScrollView;
     LinearLayout purchaseItems;
-    ImageButton purchaseAdd;
     Button purchasePay;
 
     @Override
@@ -42,13 +41,12 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchaseProfileSpinner = findViewById(R.id.purchaseProfileSpinner);
         purchaseItemsScrollView = findViewById(R.id.purchaseItemsScrollView);
         purchaseItems = findViewById(R.id.purchaseItems);
-        purchaseAdd = findViewById(R.id.purchaseAdd);
         purchasePay = findViewById(R.id.purchasePay);
 
         defineButtonHandlers();
         populateSpinner();
-/*
-        addItem("01", 1, "evian", 1.69f);
+
+/*      addItem("01", 1, "evian", 1.69f);
         addItem("02", 1, "airwaves", 2.10f);
         addItem("03", 1, "fishermans friend", 4.20f);
         addItem("04", 1, "evian", 1.69f);
@@ -57,13 +55,6 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
     private void defineButtonHandlers() {
         PurchaseActivity that = this;
-        purchaseAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(that, ScanActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
 
         purchasePay.setOnClickListener(new View.OnClickListener() {
             @Override

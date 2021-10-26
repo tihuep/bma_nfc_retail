@@ -29,7 +29,6 @@ public class ScanActivity extends AppCompatActivity {
 
     Button scanBack;
     TextView scanTitle;
-    Button scanButton;
     TextView scanArticleTitle;
     TextView scanArticleID;
     TextView scanArticleDesc;
@@ -57,7 +56,6 @@ public class ScanActivity extends AppCompatActivity {
 
         scanBack = findViewById(R.id.scanBack);
         scanTitle = findViewById(R.id.scanTitle);
-        scanButton = findViewById(R.id.scanButton);
         scanArticleTitle = findViewById(R.id.scanArticleTitle);
         scanArticleID = findViewById(R.id.scanArticleID);
         scanArticleDesc = findViewById(R.id.scanArticleDesc);
@@ -94,25 +92,6 @@ public class ScanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(Activity.RESULT_CANCELED);
                 finish();
-            }
-        });
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideError();
-
-                articleID = String.valueOf(Math.random());
-                articleAmount = (int) (Math.random()*100);
-                articleDesc = "moin moin";
-                articlePrice = (float) Math.floor(Math.random()*10000)/100;
-
-                scanArticleID.setText(articleID);
-                scanArticleDesc.setText(articleDesc);
-                scanAmount.setText(articleAmount.toString());
-
-                //TODO: trigger NFC read
-                //TODO: get article data from server
-                //TODO: populate textviews with article data
             }
         });
         scanAdd.setOnClickListener(new View.OnClickListener() {
