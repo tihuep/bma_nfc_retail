@@ -97,17 +97,19 @@ public class ScanActivity extends AppCompatActivity {
         scanAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (articleID != null && articleAmount != null && articleDesc != null && articlePrice != null
-                        && !scanAmount.getText().toString().equals("") && Integer.valueOf(scanAmount.getText().toString()) > 0){
+                articleAmount = Integer.valueOf(scanAmount.getText().toString());
+                if (articleID != null && articleAmount != null && !scanAmount.getText().toString().equals("") && Integer.valueOf(scanAmount.getText().toString()) > 0){
                     hideError();
-                    //https://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
-                    getIntent().putExtra("id", articleID);
-                    getIntent().putExtra("amount", Integer.valueOf(scanAmount.getText().toString()));
-                    getIntent().putExtra("desc", articleDesc);
-                    getIntent().putExtra("price", articlePrice);
 
-                    setResult(Activity.RESULT_OK, getIntent());
-                    finish();
+                    SharedPreferences sharedPreferences = getSharedPreferences(
+                            getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt(articleID, articleAmount);
+                    editor.apply();
+
+                    Intent intent = new Intent(that, PurchaseActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }else {
                     displayError("Bitte zuerst Artikel scannen");
                 }

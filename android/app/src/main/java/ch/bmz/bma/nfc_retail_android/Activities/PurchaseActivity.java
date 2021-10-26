@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.R;
 
@@ -51,6 +53,16 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         addItem("03", 1, "fishermans friend", 4.20f);
         addItem("04", 1, "evian", 1.69f);
         addItem("05", 1, "evian", 1.69f);*/
+
+        //TODO: add total display
+
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
+        Map<String, ?> items = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> item : items.entrySet()) {
+            addItem(item.getKey(), (Integer) item.getValue(), "asdf", 10.69f);
+            //TODO: get desc and price from server
+        }
     }
 
     private void defineButtonHandlers() {
@@ -64,16 +76,6 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
             }
         });
         purchaseProfileSpinner.setOnItemSelectedListener(this);
-    }
-
-    //https://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
-            Bundle extras = intent.getExtras();
-            addItem(extras.getString("id"), extras.getInt("amount"), extras.getString("desc"), extras.getFloat("price"));
-        }
     }
 
     //https://developer.android.com/guide/topics/ui/controls/spinner
