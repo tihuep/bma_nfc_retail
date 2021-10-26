@@ -52,7 +52,9 @@ CREATE TABLE payment
     currency    varchar(100) not null,
     confirmed   boolean      not null default false,
     purchase_id varchar(100) not null,
+    payment_method_id varchar(100) not null,
     PRIMARY KEY (id),
-    FOREIGN KEY (purchase_id) REFERENCES purchase (id) ON DELETE CASCADE
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id) ON DELETE CASCADE,
+    FOREIGN KEY (payment_method_id) REFERENCES payment_method (id) ON DELETE CASCADE
 );
 
