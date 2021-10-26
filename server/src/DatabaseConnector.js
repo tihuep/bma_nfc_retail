@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
 connection.connect();
 connection.query('USE nfc_retail;')
 
-function query(queryString, queryParams) {
+function query(queryString, ...queryParams) {
     return new Promise((resolve, reject) => {
         const sql = mysql.format(queryString, queryParams);
         connection.query(sql, (err, result) => {

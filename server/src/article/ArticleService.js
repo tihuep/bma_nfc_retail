@@ -5,7 +5,7 @@ function findAll() {
 }
 
 function findById(id) {
-    return query('SELECT * FROM article WHERE id = ?', [id]).then(result => result[0]);
+    return query('SELECT * FROM article WHERE id = ?', id).then(result => result[0]);
 }
 
 module.exports = {

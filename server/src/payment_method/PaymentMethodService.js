@@ -5,7 +5,7 @@ function findAll() {
 }
 
 function findById(id) {
-    return query('SELECT * FROM payment_method WHERE id = ?', [id]).then(result => result[0]);
+    return query('SELECT * FROM payment_method WHERE id = ?', id).then(result => result[0]);
 }
 
 module.exports = {
