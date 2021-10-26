@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">nfc_retail_android</string>
+    <string name="app_name">BMA 2021</string>
     <string name="login_title">Login</string>
     <string name="login_email_label">Email</string>
     <string name="login_pw_label">Passwort</string>
@@ -52,4 +52,11 @@
     <string name="payment_confirm_title">Bezahlung erfolgreich</string>
     <string name="payment_confirm_subtitle">Vielen Dank für Ihren Einkauf</string>
     <string name="payment_confirm_button">Neuer Einkauf</string>
+
+
+    <string name="no_nfc">Dieses Gerät unterstützt kein NFC</string>
+    <string name="activate_nfc">Bitte NFC aktivieren in den Geräteeinstellungen</string>
+
+
+    <string name="preference_file_key_purchase_items">ch.bmz.bma.nfc_retail_android.purchase_items</string>
 </resources>
