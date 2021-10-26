@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const service = require('./ArticleService');
+const service = require('./PaymentMethodService');
 
 router.get('/', (request, response) => {
     service.findAll().then(result => response.json(result));
