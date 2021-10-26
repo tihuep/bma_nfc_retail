@@ -1,9 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Model;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
 
 public class User {
     String id;

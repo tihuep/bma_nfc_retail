@@ -4,13 +4,13 @@ public class Article {
     String id;
     String description;
     Float price;
-    String image_url;
+    String imageUrl;
 
     public Article(String id, String description, Float price, String image_url) {
         this.id = id;
         this.description = description;
         this.price = price;
-        this.image_url = image_url;
+        this.imageUrl = image_url;
     }
 
     public Article(String id, String description, Float price) {
@@ -43,11 +43,11 @@ public class Article {
         this.price = price;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

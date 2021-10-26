@@ -2,13 +2,13 @@ package ch.bmz.bma.nfc_retail_android.Model;
 
 public class Payment {
     String id;
-    Integer amount;
+    Integer total;
     String currency;
     Boolean confirmed;
 
-    public Payment(String id, Integer amount, String currency, Boolean confirmed) {
+    public Payment(String id, Integer total, String currency, Boolean confirmed) {
         this.id = id;
-        this.amount = amount;
+        this.total = total;
         this.currency = currency;
         this.confirmed = confirmed;
         if (confirmed == null)
@@ -23,12 +23,12 @@ public class Payment {
         this.id = id;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     public String getCurrency() {
