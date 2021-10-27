@@ -13,8 +13,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.PurchaseService;
 
 public class ShowPurchaseActivity extends AppCompatActivity {
 
@@ -40,50 +43,24 @@ public class ShowPurchaseActivity extends AppCompatActivity {
         showPurchaseTotal = findViewById(R.id.showPurchaseTotal);
 
         defineButtonHandlers();
-
+/*
         Bundle extras = getIntent().getExtras();
         showPurchaseDate.setText(extras.getString("date"));
         showPurchaseTotal.setText(extras.getString("currency") + " " + extras.getFloat("total"));
-
+*//*
         addItem("1", 6, "fishermans friend eucalyptus", 3f);
         addItem("2", 5, "fishermans friend mint", 3.5f);
         addItem("3", 4, "fishermans friend cassis", 5f);
         addItem("4", 1, "fishermans friend", 4f);
         addItem("5", 2, "fishermans friend", 3f);
         addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
+        addItem("6", 1, "fishermans friend", 3f);*/
+
+        if (PurchaseService.myCurrentPurchase.getItems() != null) {
+            for (Map.Entry<Article, Integer> item : PurchaseService.myCurrentPurchase.getItems().entrySet()) {
+                addItem(item.getKey().getId(), item.getValue(), item.getKey().getDescription(), item.getKey().getPrice());
+            }
+        }
     }
 
     private void defineButtonHandlers() {

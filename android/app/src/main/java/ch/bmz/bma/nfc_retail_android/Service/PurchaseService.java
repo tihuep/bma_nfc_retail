@@ -1,5 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Service;
 
+import android.content.Intent;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,12 +19,17 @@ import java.util.List;
 
 import ch.bmz.bma.nfc_retail_android.Activities.MyPurchasesActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.PaymentConfirmActivity;
+import ch.bmz.bma.nfc_retail_android.Activities.ShowPurchaseActivity;
+import ch.bmz.bma.nfc_retail_android.Model.Article;
+import ch.bmz.bma.nfc_retail_android.Model.ArticlePurchaseRequest;
+import ch.bmz.bma.nfc_retail_android.Model.ArticleRequest;
 import ch.bmz.bma.nfc_retail_android.Model.PaymentMethod;
 import ch.bmz.bma.nfc_retail_android.Model.PaymentRequest;
 import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.Model.PurchaseRequest;
 
 public class PurchaseService {
+    public static Purchase myCurrentPurchase;
     public static void getPurchasesOfUser(MyPurchasesActivity context) {
         String url = "http://bma.timonhueppi.ch:8080/purchases/user/" + PurchasePaymentService.testUser.getId();
 
@@ -48,9 +55,9 @@ public class PurchaseService {
                                 java.text.SimpleDateFormat sdf =
                                         new java.text.SimpleDateFormat("dd.MM.yyyy");
                                 String currentTime = sdf.format(confirmationDate);
-                                context.addItem(payment.getId(), currentTime, payment.getCurrency(), payment.getTotal());
+                                context.addItem(purchase.getId(), currentTime, payment.getCurrency(), payment.getTotal());
                             }catch (Exception e){
-                                context.addItem(payment.getId(), payment.getConfirmation_date(), payment.getCurrency(), payment.getTotal());
+                                context.addItem(purchase.getId(), payment.getConfirmation_date(), payment.getCurrency(), payment.getTotal());
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -59,6 +66,47 @@ public class PurchaseService {
                             //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
                     }), context);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+            }
+        }), context);
+    }
+
+    public static void getItemsOfPurchase(MyPurchasesActivity context, String purchaseId) {
+        String url = "http://bma.timonhueppi.ch:8080/purchases/" + purchaseId + "/items";
+
+        WebProvider.doRequest(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                ArrayList<ArticlePurchaseRequest> items = gson.fromJson(response, new TypeToken<List<ArticlePurchaseRequest>>() {}.getType());
+                for (ArticlePurchaseRequest item : items) {
+                    Integer amount = item.getAmount();
+                    String url = "http://bma.timonhueppi.ch:8080/articles/" + item.getArticle_id();
+
+                    WebProvider.doRequest(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Gson gson = new Gson();
+                            ArticleRequest article = gson.fromJson(response, ArticleRequest.class);
+                            myCurrentPurchase.addItem(new Article(article.getId(), article.getDescription(), article.getPrice(), article.getImage_url()), amount);
+                            Intent intent = new Intent(context, ShowPurchaseActivity.class);
+                            context.startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                        }
+                    }), context);
+                }
+                if (items.size() == 0){
+                    Intent intent = new Intent(context, ShowPurchaseActivity.class);
+                    context.startActivity(intent);
                 }
             }
         }, new Response.ErrorListener() {

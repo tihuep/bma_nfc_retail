@@ -1,5 +1,6 @@
 package ch.bmz.bma.nfc_retail_android.Model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Purchase {
@@ -43,12 +44,18 @@ public class Purchase {
     }
 
     public void addItem(Article item, Integer amount){
+        if (items == null){
+            items = new HashMap<>();
+        }
         if (item != null && amount > 0){
             items.put(item, amount);
         }
     }
 
     public void removeItem(Article item, Integer amount){
+        if (items == null){
+            items = new HashMap<>();
+        }
         Integer currentAmount = items.get(item);
         if (item != null && currentAmount != null && amount > 0) {
             Integer newAmount = currentAmount - amount;

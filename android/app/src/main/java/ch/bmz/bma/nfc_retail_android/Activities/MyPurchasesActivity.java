@@ -13,9 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import ch.bmz.bma.nfc_retail_android.Model.Purchase;
+import ch.bmz.bma.nfc_retail_android.Model.User;
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
 import ch.bmz.bma.nfc_retail_android.Service.PurchaseService;
 
 public class MyPurchasesActivity extends AppCompatActivity {
@@ -77,12 +82,15 @@ public class MyPurchasesActivity extends AppCompatActivity {
         purchaseItemSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(that, ShowPurchaseActivity.class);
-                intent.putExtra("id", id);
+                PurchaseService.myCurrentPurchase = new Purchase(id, PurchasePaymentService.testUser, null);
+                PurchaseService.getItemsOfPurchase(that, id);
+
+                //Intent intent = new Intent(that, ShowPurchaseActivity.class);
+                /*intent.putExtra("id", id);
                 intent.putExtra("date", date);
                 intent.putExtra("currency", currency);
-                intent.putExtra("total", total);
-                startActivity(intent);
+                intent.putExtra("total", total);*/
+                //startActivity(intent);
             }
         });
 
