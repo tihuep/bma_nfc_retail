@@ -2,7 +2,6 @@ package ch.bmz.bma.nfc_retail_android.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,8 +27,8 @@ import java.util.Map;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.R;
-import ch.bmz.bma.nfc_retail_android.service.ArticleService;
-import ch.bmz.bma.nfc_retail_android.service.PurchasePaymentService;
+import ch.bmz.bma.nfc_retail_android.Service.ArticleService;
+import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
 
 public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

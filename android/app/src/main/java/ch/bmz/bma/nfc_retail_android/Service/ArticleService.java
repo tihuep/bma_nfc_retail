@@ -1,20 +1,14 @@
-package ch.bmz.bma.nfc_retail_android.service;
+package ch.bmz.bma.nfc_retail_android.Service;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ch.bmz.bma.nfc_retail_android.Activities.PurchaseActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.ScanActivity;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
-import ch.bmz.bma.nfc_retail_android.Model.PaymentMethod;
-import ch.bmz.bma.nfc_retail_android.R;
 
 public class ArticleService {
     public static void getArticleForPurchase(PurchaseActivity context, Article articleNeeded) {

@@ -1,6 +1,4 @@
-package ch.bmz.bma.nfc_retail_android.service;
-
-import android.view.View;
+package ch.bmz.bma.nfc_retail_android.Service;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -8,16 +6,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
-import ch.bmz.bma.nfc_retail_android.Activities.PaymentActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.PaymentConfirmActivity;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.Model.ArticlePurchaseRequest;
@@ -26,7 +19,6 @@ import ch.bmz.bma.nfc_retail_android.Model.PaymentRequest;
 import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.Model.PurchaseRequest;
 import ch.bmz.bma.nfc_retail_android.Model.User;
-import ch.bmz.bma.nfc_retail_android.R;
 
 public class PurchasePaymentService {
     public static Purchase currentPurchase;

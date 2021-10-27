@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 import ch.bmz.bma.nfc_retail_android.Model.PaymentMethod;
 import ch.bmz.bma.nfc_retail_android.R;
-import ch.bmz.bma.nfc_retail_android.service.PaymentMethodService;
-import ch.bmz.bma.nfc_retail_android.service.PurchasePaymentService;
+import ch.bmz.bma.nfc_retail_android.Service.PaymentMethodService;
+import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
 
 public class PaymentActivity extends AppCompatActivity {
 

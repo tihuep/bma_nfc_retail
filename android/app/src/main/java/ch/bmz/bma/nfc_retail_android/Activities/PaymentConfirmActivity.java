@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ch.bmz.bma.nfc_retail_android.R;
-import ch.bmz.bma.nfc_retail_android.service.PurchasePaymentService;
+import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
 
 public class PaymentConfirmActivity extends AppCompatActivity {
 

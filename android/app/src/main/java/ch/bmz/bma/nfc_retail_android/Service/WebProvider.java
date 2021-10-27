@@ -1,4 +1,4 @@
-package ch.bmz.bma.nfc_retail_android.service;
+package ch.bmz.bma.nfc_retail_android.Service;
 
 import android.content.Context;
 

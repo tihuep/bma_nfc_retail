@@ -21,11 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.R;
-import ch.bmz.bma.nfc_retail_android.service.ArticleService;
+import ch.bmz.bma.nfc_retail_android.Service.ArticleService;
 
 public class ScanActivity extends AppCompatActivity {
 
