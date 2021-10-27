@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.service.PaymentMethodService;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
     TextView paymentErrorLabel;
     Button paymentButton;
 
-    ArrayList<String> options;
+    public ArrayList<String> options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +46,16 @@ public class PaymentActivity extends AppCompatActivity {
 
         paymentError.setVisibility(View.GONE);
 
-        options = new ArrayList<>();
+        options = new ArrayList<>();/*
         options.add("Twint");
         options.add("PayPal");
-        options.add("Kreditkarte");
+        options.add("Kreditkarte");*/
+
+        PaymentMethodService.getPaymentMethods(this);
 
         defineButtonHandlers();
-
-        populateRadioButtons();
+/*
+        populateRadioButtons();*/
     }
 
     private void defineButtonHandlers() {
@@ -87,7 +90,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
     }
 
-    private void populateRadioButtons() {
+    public void populateRadioButtons() {
         for (String option : options) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
             View item =  layoutInflater.inflate(R.layout.payment_option, null);

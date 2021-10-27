@@ -2,11 +2,11 @@ package ch.bmz.bma.nfc_retail_android.Model;
 
 public class PaymentMethod {
     String id;
-    String method;
+    String name;
 
     public PaymentMethod(String id, String method) {
         this.id = id;
-        this.method = method;
+        this.name = method;
     }
 
     public String getId() {
@@ -17,11 +17,11 @@ public class PaymentMethod {
         this.id = id;
     }
 
-    public String getMethod() {
-        return method;
+    public String getName() {
+        return name;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setName(String name) {
+        this.name = name;
     }
 }
