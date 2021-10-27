@@ -29,7 +29,7 @@ public class PaymentMethodService {
                 ArrayList<PaymentMethod> paymentMethods = gson.fromJson(response, new TypeToken<List<PaymentMethod>>() {}.getType());
                 for (PaymentMethod paymentMethod :
                         paymentMethods) {
-                    context.options.add(paymentMethod.getName());
+                    context.options.add(paymentMethod);
                 }
                 context.populateRadioButtons();
             }
