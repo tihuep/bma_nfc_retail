@@ -60,7 +60,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
         Map<String, ?> items = sharedPreferences.getAll();
         for (Map.Entry<String, ?> item : items.entrySet()) {
-            addItem(item.getKey(), (Integer) item.getValue(), "asdf", 10.69f);
+            addItem(item.getKey(), (Integer) item.getValue(), item.getKey() + " asdf", 10.69f);
             //TODO: get desc and price from server
         }
     }
@@ -166,5 +166,10 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 purchaseItems.removeView(view);
             }
         }
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(id);
+        editor.apply();
     }
 }

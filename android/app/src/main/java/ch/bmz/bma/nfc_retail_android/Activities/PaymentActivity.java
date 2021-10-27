@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class PaymentActivity extends AppCompatActivity {
     TextView paymentErrorLabel;
     Button paymentButton;
 
-    public ArrayList<String> options;
+    public ArrayList<String> options = new ArrayList<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +47,9 @@ public class PaymentActivity extends AppCompatActivity {
 
         paymentError.setVisibility(View.GONE);
 
-        options = new ArrayList<>();/*
-        options.add("Twint");
-        options.add("PayPal");
-        options.add("Kreditkarte");*/
+        defineButtonHandlers();
 
         PaymentMethodService.getPaymentMethods(this);
-
-        defineButtonHandlers();
-/*
-        populateRadioButtons();*/
     }
 
     private void defineButtonHandlers() {
@@ -83,6 +77,12 @@ public class PaymentActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(
+                            getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
                 }else {
                     displayError("Bitte Zahlmethode auswählen");
                 }

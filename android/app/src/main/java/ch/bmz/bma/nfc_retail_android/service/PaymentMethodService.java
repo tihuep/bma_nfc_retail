@@ -19,11 +19,13 @@ import ch.bmz.bma.nfc_retail_android.R;
 public class PaymentMethodService {
 
     public static void getPaymentMethods(PaymentActivity context) {
+        //https://developer.android.com/training/volley/simple#java
         String url = "http://bma.timonhueppi.ch:8080/payment_methods";
         WebProvider.doRequest(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
+                //https://stackoverflow.com/a/12384156
                 ArrayList<PaymentMethod> paymentMethods = gson.fromJson(response, new TypeToken<List<PaymentMethod>>() {}.getType());
                 for (PaymentMethod paymentMethod :
                         paymentMethods) {
