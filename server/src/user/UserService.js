@@ -10,9 +10,10 @@ function findById(id) {
 }
 
 function insert(user) {
+    const id = user.id ? user.id : uuid();
     query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
-        user.id ? user.id : uuid(), user.first_name, user.last_name, user.email, user.password);
-    return findById(user.id);
+        id, user.first_name, user.last_name, user.email, user.password);
+    return findById(id);
 }
 
 function update(user) {
