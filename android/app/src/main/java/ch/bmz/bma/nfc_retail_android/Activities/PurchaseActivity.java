@@ -21,12 +21,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.Model.Article;
+import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.R;
 import ch.bmz.bma.nfc_retail_android.service.ArticleService;
+import ch.bmz.bma.nfc_retail_android.service.PurchasePaymentService;
 
 public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -35,6 +38,8 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
     ScrollView purchaseItemsScrollView;
     LinearLayout purchaseItems;
     Button purchasePay;
+
+    Map<Article, Integer> items = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,8 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View v) {
                 Intent intent = new Intent(that, PaymentActivity.class);
                 startActivity(intent);
+
+                PurchasePaymentService.currentPurchase = new Purchase(null, PurchasePaymentService.testUser, that.items);
             }
         });
         purchaseProfileSpinner.setOnItemSelectedListener(this);
@@ -138,14 +145,14 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
             for (Map.Entry<String, ?> item : items.entrySet()) {
                 if (item.getKey().equals(article.getId())) {
-                    addItem(item.getKey(), (Integer) item.getValue(), article.getDescription(), article.getPrice());
+                    addItem(article, (Integer) item.getValue());
                 }
             }
         }
 
     }
 
-    public void addItem(String id, Integer amount, String desc, Float price) {
+    public void addItem(Article article, Integer amount) {
         //https://stackoverflow.com/questions/9807650/dynamically-cloning-a-linearlayout-in-android
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
         View item =  layoutInflater.inflate(R.layout.article_list_item_deletable, null);
@@ -154,22 +161,23 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         articleItemAmount.setText(amount.toString() + " ");
 
         TextView articleItemDesc = item.findViewById(R.id.articleItemDeletableDesc);
-        articleItemDesc.setText(desc);
+        articleItemDesc.setText(article.getDescription());
 
         TextView articleItemPrice = item.findViewById(R.id.articleItemDeletablePrice);
-        articleItemPrice.setText("CHF " + price.toString());
+        articleItemPrice.setText("CHF " + article.getPrice().toString());
 
-        item.setContentDescription(id);
+        item.setContentDescription(article.getId());
 
         ImageButton articleItemDelete = item.findViewById(R.id.articleItemDeletableDelete);
         articleItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeItem(id);
+                removeItem(article.getId());
             }
         });
 
         purchaseItems.addView(item);
+        this.items.put(article, amount);
     }
 
     public void removeItem(String id) {
@@ -187,5 +195,11 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(id);
         editor.apply();
+
+        for (Map.Entry<Article, Integer> item : this.items.entrySet()) {
+            if (item.getKey().getId().equals(id)) {
+                this.items.remove(item.getKey());
+            }
+        }
     }
 }

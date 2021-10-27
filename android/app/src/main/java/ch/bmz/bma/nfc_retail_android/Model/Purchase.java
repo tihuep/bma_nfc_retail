@@ -6,22 +6,16 @@ public class Purchase {
     String id;
     User user;
     Map<Article, Integer> items;
-    PaymentMethod paymentMethod;
-    Payment payment;
 
-    public Purchase(String id, User user, Map<Article, Integer> items, PaymentMethod paymentMethod, Payment payment) {
+    public Purchase(String id, User user, Map<Article, Integer> items) {
         this.id = id;
         this.user = user;
         this.items = items;
-        this.paymentMethod = paymentMethod;
-        this.payment = payment;
     }
 
-    public Purchase(User user, Map<Article, Integer> items, PaymentMethod paymentMethod, Payment payment) {
+    public Purchase(User user, Map<Article, Integer> items) {
         this.user = user;
         this.items = items;
-        this.paymentMethod = paymentMethod;
-        this.payment = payment;
     }
 
     public String getId() {
@@ -46,22 +40,6 @@ public class Purchase {
 
     public void setItems(Map<Article, Integer> items) {
         this.items = items;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public void addItem(Article item, Integer amount){
