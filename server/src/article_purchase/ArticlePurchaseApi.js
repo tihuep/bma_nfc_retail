@@ -14,7 +14,7 @@ router.post('/:purchase_id/items', (request, response) => {
     service.insert(request.body).then(result => response.json(result));
 })
 
-router.put('/:purchase_id/items', (request, response) => {
+router.put('/:purchase_id/items/:article_id', (request, response) => {
     service.update(request.body).then(result => response.json(result));
 })
 
