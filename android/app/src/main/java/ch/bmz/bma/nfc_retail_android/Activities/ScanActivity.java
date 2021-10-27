@@ -23,7 +23,9 @@ import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.service.ArticleService;
 
 public class ScanActivity extends AppCompatActivity {
 
@@ -147,14 +149,18 @@ public class ScanActivity extends AppCompatActivity {
             articleAmount = 1;
             scanArticleID.setText(articleID);
             scanAmount.setText(articleAmount.toString());
-
+            ArticleService.getArticleForScan(this, new Article(articleID, null, null, null));
         }catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
     }
 
+    public void setScanArticleID(String text) {
+        scanArticleID.setText(text);
+    }
+
     @Override
-    protected  void onNewIntent(Intent intent) {
+    protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         readFromIntent(intent);
