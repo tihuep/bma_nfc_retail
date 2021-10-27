@@ -24,7 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.service.ArticleService;
 
 public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -60,8 +62,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
         Map<String, ?> items = sharedPreferences.getAll();
         for (Map.Entry<String, ?> item : items.entrySet()) {
-            addItem(item.getKey(), (Integer) item.getValue(), item.getKey() + " asdf", 10.69f);
-            //TODO: get desc and price from server
+            ArticleService.getArticleForPurchase(this, new Article(item.getKey(), null, null, null));
         }
     }
 
@@ -127,6 +128,21 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
         spinnerArrayAdapter.setDropDownViewResource(R.layout.profile_spinner_item);
         purchaseProfileSpinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    public void populateList(Article article) {
+        if (article != null) {
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
+            Map<String, ?> items = sharedPreferences.getAll();
+
+            for (Map.Entry<String, ?> item : items.entrySet()) {
+                if (item.getKey().equals(article.getId())) {
+                    addItem(item.getKey(), (Integer) item.getValue(), article.getDescription(), article.getPrice());
+                }
+            }
+        }
+
     }
 
     public void addItem(String id, Integer amount, String desc, Float price) {
