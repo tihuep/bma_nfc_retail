@@ -71,8 +71,6 @@ public class PaymentActivity extends AppCompatActivity {
                     if (options.size() > optionID) {
                         PurchasePaymentService.currentPaymentMethod = options.get(optionID);
 
-                        PurchasePaymentService.postPurchase(that);
-
                         //https://stackoverflow.com/questions/7075349/android-clear-activity-stack
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

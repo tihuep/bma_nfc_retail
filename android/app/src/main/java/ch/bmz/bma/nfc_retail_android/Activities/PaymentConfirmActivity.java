@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.service.PurchasePaymentService;
 
 public class PaymentConfirmActivity extends AppCompatActivity {
 
@@ -32,6 +33,8 @@ public class PaymentConfirmActivity extends AppCompatActivity {
             paymentConfirmMethod.setText(extras.getString("method"));
 
         defineButtonHandlers();
+
+        PurchasePaymentService.postPurchase(this);
     }
 
     private void defineButtonHandlers() {
@@ -47,5 +50,4 @@ public class PaymentConfirmActivity extends AppCompatActivity {
             }
         });
     }
-
 }

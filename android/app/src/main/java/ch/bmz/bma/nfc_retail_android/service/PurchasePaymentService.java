@@ -1,5 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.service;
 
+import android.view.View;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -10,13 +12,17 @@ import com.google.gson.reflect.TypeToken;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.Activities.PaymentActivity;
+import ch.bmz.bma.nfc_retail_android.Activities.PaymentConfirmActivity;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.Model.ArticlePurchaseRequest;
 import ch.bmz.bma.nfc_retail_android.Model.PaymentMethod;
+import ch.bmz.bma.nfc_retail_android.Model.PaymentRequest;
 import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.Model.PurchaseRequest;
 import ch.bmz.bma.nfc_retail_android.Model.User;
@@ -27,7 +33,7 @@ public class PurchasePaymentService {
     public static PaymentMethod currentPaymentMethod;
     public static User testUser = new User("69", "Timon", "Hüppi", "timon.hueppi@gmail.com", "");
 
-    public static void postPurchase(PaymentActivity context) {
+    public static void postPurchase(PaymentConfirmActivity context) {
         String url = "http://bma.timonhueppi.ch:8080/purchases";
         Gson gson = new Gson();
         PurchaseRequest purchaseRequest = new PurchaseRequest(null, testUser.getId(), null);
@@ -36,6 +42,8 @@ public class PurchasePaymentService {
             @Override
             public void onResponse(String response) {
                 PurchaseRequest purchase = gson.fromJson(response, PurchaseRequest.class);
+                currentPurchase.setId(purchase.getId());
+                postPayment(context);
                 for (Map.Entry<Article, Integer> item : currentPurchase.getItems().entrySet()) {
                     String requestBodyStrItem = gson.toJson(new ArticlePurchaseRequest(item.getValue(), purchase.getId(), item.getKey().getId()));
 
@@ -43,13 +51,12 @@ public class PurchasePaymentService {
                     WebProvider.doRequest(new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Gson gson = new Gson();
-                            Object object = gson.fromJson(response, new TypeToken<List<PaymentMethod>>() {}.getType());
+                            //nix nada
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                            //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
                     }) {
                         //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
@@ -69,7 +76,7 @@ public class PurchasePaymentService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
         }) {
             //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
@@ -85,21 +92,27 @@ public class PurchasePaymentService {
         }, context);
     }
 
-    public static void postPayment(PaymentActivity context) {
-        String url = "http://bma.timonhueppi.ch:8080/purchases";
+    public static void postPayment(PaymentConfirmActivity context) {
+        String url = "http://bma.timonhueppi.ch:8080/payments";
         Gson gson = new Gson();
-        PurchaseRequest purchaseRequest = new PurchaseRequest(null, testUser.getId(), null);
-        String requestBodyStr = gson.toJson(purchaseRequest);
+
+        //https://stackoverflow.com/a/2400981
+        Date dt = new Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(dt);
+
+        PaymentRequest paymentRequest = new PaymentRequest(null, 0f, "CHF", true, currentTime, currentPurchase.getId(), currentPaymentMethod.getId());
+        String requestBodyStr = gson.toJson(paymentRequest);
         WebProvider.doRequest(new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                PurchaseRequest purchase = gson.fromJson(response, PurchaseRequest.class);
-
+                //PaymentRequest payment = gson.fromJson(response, PaymentRequest.class);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
         }) {
             //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
