@@ -20,7 +20,7 @@ function update(articlePurchase) {
     return findByArticleIdAndPurchaseId(articlePurchase.article_id, articlePurchase.purchase_id);
 }
 
-function deleteByPurchaseIdAndArticleId(articleId, purchaseId) {
+function deleteByArticleIdAndPurchaseId(articleId, purchaseId) {
     const purchase = findByArticleIdAndPurchaseId(articleId, purchaseId);
     query('DELETE FROM article_purchase WHERE purchase_id = ? AND article_id = ?', purchaseId,  articleId);
     return purchase;
@@ -31,5 +31,5 @@ module.exports = {
     findByArticleIdAndPurchaseId,
     insert,
     update,
-    deleteByPurchaseIdAndArticleId
+    deleteByArticleIdAndPurchaseId
 };

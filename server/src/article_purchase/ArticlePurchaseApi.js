@@ -19,7 +19,7 @@ router.put('/:purchase_id/items', (request, response) => {
 })
 
 router.delete('/:purchase_id/items/:article_id', (request, response) => {
-    service.deleteByPurchaseIdAndArticleId(request.params.purchase_id, request.params.article_id).then(result => response.json(result));
+    service.deleteByArticleIdAndPurchaseId(request.params.article_id, request.params.purchase_id).then(result => response.json(result));
 })
 
 module.exports = router;

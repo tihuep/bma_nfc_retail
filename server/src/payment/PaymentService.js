@@ -1,5 +1,5 @@
 const {query} = require("../DatabaseConnector");
-const {uuid} = require("uuidv4")
+const {v4: uuidV4} = require("uuid")
 
 function findAll() {
     return query('SELECT * FROM payment');
@@ -14,14 +14,14 @@ function findByPurchaseId(purchaseId) {
 }
 
 function insert(payment) {
-    const id = payment.id ? payment.id : uuid();
+    const id = payment.id ? payment.id : uuidV4();
     query('INSERT INTO payment (id, total, currency, confirmed, confirmation_date, purchase_id, payment_method_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
         id, payment.total, payment.currency, payment.confirmed ? payment.confirmed : 'DEFAULT', payment.confirmation_date, payment.purchase_id, payment.payment_method_id);
     return findById(id);
 }
 
 function update(payment) {
-    query('UPDATE payment SET total = ?, confirmed = ?, confirmation_date = ?, purchase_id = ?, payment_method_id = ? WHERE id = ?',
+    query('UPDATE payment SET total = ?, currency = ?, confirmed = ?, confirmation_date = ?, purchase_id = ?, payment_method_id = ? WHERE id = ?',
         payment.total, payment.currency, payment.confirmed, payment.confirmation_date, payment.purchase_id, payment.payment_method_id, payment.id)
     return findById(payment.id);
 }

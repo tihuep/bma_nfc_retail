@@ -1,5 +1,5 @@
 const {query} = require("../DatabaseConnector");
-const {uuid} = require("uuidv4")
+const {v4: uuidV4} = require("uuid")
 const articlePurchaseService = require("../article_purchase/ArticlePurchaseService")
 
 function findAll() {
@@ -21,7 +21,7 @@ function findById(id) {
 }
 
 function insert(purchase) {
-    const id = purchase.id ? purchase.id : uuid();
+    const id = purchase.id ? purchase.id : uuidV4();
     query('INSERT INTO purchase (id, user_id) VALUES (?, ?)', id, purchase.user_id);
     return findById(id);
 }

@@ -1,5 +1,5 @@
 const {query} = require("../DatabaseConnector");
-const {uuid} = require("uuidv4");
+const {v4: uuidV4} = require("uuid")
 
 function findAll() {
     return query('SELECT * FROM user');
@@ -10,7 +10,7 @@ function findById(id) {
 }
 
 function insert(user) {
-    const id = user.id ? user.id : uuid();
+    const id = user.id ? user.id : uuidV4();
     query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
         id, user.first_name, user.last_name, user.email, user.password);
     return findById(id);
@@ -29,7 +29,9 @@ function deleteById(id) {
 }
 
 function login(user) {
-    return query('SELECT password FROM user WHERE email = ?', user.email).then(result => result === user.password);
+    return query('SELECT password FROM user WHERE email = ?', user.email).then(result => {
+        return result[0].password === user.password;
+    });
 }
 
 module.exports = {
