@@ -21,8 +21,9 @@ function findById(id) {
 }
 
 function insert(purchase) {
-    query('INSERT INTO purchase (id, user_id) VALUES (?, ?)', purchase.id ? purchase.id : uuid(), purchase.user_id);
-    return findById(purchase.id);
+    const id = purchase.id ? purchase.id : uuid();
+    query('INSERT INTO purchase (id, user_id) VALUES (?, ?)', id, purchase.user_id);
+    return findById(id);
 }
 
 function update(purchase) {

@@ -32,11 +32,17 @@ function deleteById(id) {
     return payment;
 }
 
+function confirmPaymentById(id) {
+    query('UPDATE payment SET confirmed = true, confirmation_date = SYSDATE() WHERE id = ?', id);
+    return findById(id);
+}
+
 module.exports = {
     findAll,
     findById,
     findByPurchaseId,
     insert,
     update,
-    deleteById
+    deleteById,
+    confirmPaymentById
 }
