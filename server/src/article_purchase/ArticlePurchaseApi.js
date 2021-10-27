@@ -7,7 +7,7 @@ router.get('/:purchase_id/items', (request, response) => {
 })
 
 router.get('/:purchase_id/items/:article_id', (request, response) => {
-    service.findByArticleIdAndPurchaseId(request.params.article_id, purchase_id).then(result => response.json(result));
+    service.findByArticleIdAndPurchaseId(request.params.article_id, request.params.purchase_id).then(result => response.json(result));
 })
 
 router.post('/:purchase_id/items', (request, response) => {

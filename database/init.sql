@@ -51,7 +51,7 @@ CREATE TABLE payment
     total             float        not null,
     currency          varchar(100) not null,
     confirmed         boolean      not null default false,
-    confirmation_date datetime     not null default CURRENT_TIMESTAMP,
+    confirmation_date datetime,
     purchase_id       varchar(100) not null,
     payment_method_id varchar(100) not null,
     PRIMARY KEY (id),
