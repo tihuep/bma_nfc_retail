@@ -22,7 +22,7 @@ function insert(payment) {
 
 function update(payment) {
     query('UPDATE payment SET total = ?, confirmed = ?, confirmation_date = ?, purchase_id = ?, payment_method_id = ? WHERE id = ?',
-        payment.total, payment.currency, payment.confirmed ? payment.confirmed : 'DEFAULT', payment.confirmation_date, payment.purchase_id, payment.payment_method_id, payment.id)
+        payment.total, payment.currency, payment.confirmed, payment.confirmation_date, payment.purchase_id, payment.payment_method_id, payment.id)
     return findById(payment.id);
 }
 

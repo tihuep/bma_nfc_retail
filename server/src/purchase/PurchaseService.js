@@ -1,8 +1,13 @@
 const {query} = require("../DatabaseConnector");
+const {uuid} = require("uuidv4")
 const articlePurchaseService = require("../article_purchase/ArticlePurchaseService")
 
 function findAll() {
     return query('SELECT * FROM purchase');
+}
+
+function findAllByUserId(user_id) {
+    return query('SELECT * FROM purchase WHERE user_id = ?', user_id)
 }
 
 function findById(id) {
@@ -16,7 +21,7 @@ function findById(id) {
 }
 
 function insert(purchase) {
-    query('INSERT INTO purchase (id, user_id) VALUES (?, ?)', purchase.id, purchase.user_id);
+    query('INSERT INTO purchase (id, user_id) VALUES (?, ?)', purchase.id ? purchase.id : uuid(), purchase.user_id);
     return findById(purchase.id);
 }
 
@@ -33,6 +38,7 @@ function deleteById(id) {
 
 module.exports = {
     findAll,
+    findAllByUserId,
     findById,
     insert,
     update,

@@ -22,4 +22,8 @@ router.delete('/:id', (request, response) => {
     service.deleteById(request.params.id).then(result => response.json(result));
 })
 
+router.post('/login', (request, response) => {
+    service.login(request.body).then(result => response.json(result));
+})
+
 module.exports = router;

@@ -6,6 +6,10 @@ router.get('/', (request, response) => {
     service.findAll().then(result => response.json(result));
 })
 
+router.get('/user/:user_id', (request, response) => {
+    service.findAllByUserId(request.params.user_id).then(result => response.json(result));
+})
+
 router.get('/:id', (request, response) => {
     service.findById(request.params.id).then(result => response.json(result));
 })

@@ -25,3 +25,5 @@ router.put('/:id', (request, response) => {
 router.delete('/:id', (request, response) => {
     service.deleteById(request.params.id).then(result => response.json(result));
 })
+
+module.exports = router;
