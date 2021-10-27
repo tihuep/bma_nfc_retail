@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.PurchaseService;
 
 public class MyPurchasesActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class MyPurchasesActivity extends AppCompatActivity {
 
         defineButtonHandlers();
 
-        addItem("1", "01.10.2021", "CHF", 1.00f);
+        /*addItem("1", "01.10.2021", "CHF", 1.00f);
         addItem("2", "02.10.2021", "CHF", 2f);
         addItem("3", "03.10.2021", "CHF", 3f);
         addItem("4", "04.10.2021", "CHF", 4f);
@@ -45,16 +46,8 @@ public class MyPurchasesActivity extends AppCompatActivity {
         addItem("7", "07.10.2021", "CHF", 7f);
         addItem("8", "08.10.2021", "CHF", 10.69f);
         addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
+        addItem("8", "08.10.2021", "CHF", 10.69f);*/
+        PurchaseService.getPurchasesOfUser(this);
     }
 
     private void defineButtonHandlers() {
