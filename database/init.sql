@@ -47,11 +47,12 @@ CREATE TABLE payment_method
 
 CREATE TABLE payment
 (
-    id          varchar(100) not null,
-    total       float        not null,
-    currency    varchar(100) not null,
-    confirmed   boolean      not null default false,
-    purchase_id varchar(100) not null,
+    id                varchar(100) not null,
+    total             float        not null,
+    currency          varchar(100) not null,
+    confirmed         boolean      not null default false,
+    confirmation_date datetime     not null default CURRENT_TIMESTAMP,
+    purchase_id       varchar(100) not null,
     payment_method_id varchar(100) not null,
     PRIMARY KEY (id),
     FOREIGN KEY (purchase_id) REFERENCES purchase (id) ON DELETE CASCADE,
