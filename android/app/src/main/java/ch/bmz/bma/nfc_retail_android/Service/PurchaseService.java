@@ -30,6 +30,7 @@ import ch.bmz.bma.nfc_retail_android.Model.PurchaseRequest;
 
 public class PurchaseService {
     public static Purchase myCurrentPurchase;
+    public static String myCurrentPurchasDate;
     public static void getPurchasesOfUser(MyPurchasesActivity context) {
         String url = "http://bma.timonhueppi.ch:8080/purchases/user/" + PurchasePaymentService.testUser.getId();
 
@@ -94,8 +95,10 @@ public class PurchaseService {
                             Gson gson = new Gson();
                             ArticleRequest article = gson.fromJson(response, ArticleRequest.class);
                             myCurrentPurchase.addItem(new Article(article.getId(), article.getDescription(), article.getPrice(), article.getImage_url()), amount);
-                            Intent intent = new Intent(context, ShowPurchaseActivity.class);
-                            context.startActivity(intent);
+                            if (items.get(items.size()-1) == item) {
+                                Intent intent = new Intent(context, ShowPurchaseActivity.class);
+                                context.startActivity(intent);
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override

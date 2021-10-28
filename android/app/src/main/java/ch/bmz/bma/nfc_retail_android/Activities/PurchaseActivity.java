@@ -36,9 +36,11 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
     Spinner purchaseProfileSpinner;
     ScrollView purchaseItemsScrollView;
     LinearLayout purchaseItems;
+    TextView purchaseTotal;
     Button purchasePay;
 
     Map<Article, Integer> items = new HashMap<>();
+    Float total = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +51,13 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchaseProfileSpinner = findViewById(R.id.purchaseProfileSpinner);
         purchaseItemsScrollView = findViewById(R.id.purchaseItemsScrollView);
         purchaseItems = findViewById(R.id.purchaseItems);
+        purchaseTotal = findViewById(R.id.purchaseTotal);
         purchasePay = findViewById(R.id.purchasePay);
 
         defineButtonHandlers();
         populateSpinner();
 
-/*      addItem("01", 1, "evian", 1.69f);
-        addItem("02", 1, "airwaves", 2.10f);
-        addItem("03", 1, "fishermans friend", 4.20f);
-        addItem("04", 1, "evian", 1.69f);
-        addItem("05", 1, "evian", 1.69f);*/
-
-        //TODO: add total display
+        setTotal();
 
         SharedPreferences sharedPreferences = getSharedPreferences(
                 getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
@@ -80,6 +77,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 startActivity(intent);
 
                 PurchasePaymentService.currentPurchase = new Purchase(null, PurchasePaymentService.testUser, that.items);
+                PurchasePaymentService.currentTotal = total;
             }
         });
         purchaseProfileSpinner.setOnItemSelectedListener(this);
@@ -157,13 +155,14 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         View item =  layoutInflater.inflate(R.layout.article_list_item_deletable, null);
 
         TextView articleItemAmount = item.findViewById(R.id.articleItemDeletableAmount);
-        articleItemAmount.setText(amount.toString() + " ");
+        articleItemAmount.setText(amount.toString() + "*  ");
 
         TextView articleItemDesc = item.findViewById(R.id.articleItemDeletableDesc);
         articleItemDesc.setText(article.getDescription());
 
         TextView articleItemPrice = item.findViewById(R.id.articleItemDeletablePrice);
-        articleItemPrice.setText("CHF " + article.getPrice().toString());
+        Float multipliedPrice = article.getPrice() * amount;
+        articleItemPrice.setText(getResources().getString(R.string.purchase_chf) + multipliedPrice.toString());
 
         item.setContentDescription(article.getId());
 
@@ -177,6 +176,8 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
         purchaseItems.addView(item);
         this.items.put(article, amount);
+        this.total += multipliedPrice;
+        setTotal();
     }
 
     public void removeItem(String id) {
@@ -197,8 +198,14 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
         for (Map.Entry<Article, Integer> item : this.items.entrySet()) {
             if (item.getKey().getId().equals(id)) {
+                this.total -= item.getKey().getPrice()*item.getValue();
+                setTotal();
                 this.items.remove(item.getKey());
             }
         }
+    }
+
+    public void setTotal(){
+        purchaseTotal.setText(getResources().getString(R.string.purchase_total) + total.toString());
     }
 }

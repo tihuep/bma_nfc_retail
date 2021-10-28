@@ -20,6 +20,8 @@
     <string name="purchase_change_pw_label">Passwort ändern</string>
     <string name="purchase_mypurchases_label">Meine Einkäufe</string>
     <string name="purchase_logout_label">Abmelden</string>
+    <string name="purchase_total">Total: </string>
+    <string name="purchase_chf">CHF </string>
     <string name="purchase_pay">Bezahlen</string>
 
     <string name="article_delete">Löschen</string>
@@ -36,7 +38,7 @@
 
     <string name="show_purchase_back">Zurück</string>
     <string name="show_purchase_title">Einkauf</string>
-    <string name="show_purchase_total_label">Total</string>
+    <string name="show_purchase_total_label">Total: </string>
 
     <string name="scan_back">Zurück</string>
     <string name="scan_title">Scan</string>

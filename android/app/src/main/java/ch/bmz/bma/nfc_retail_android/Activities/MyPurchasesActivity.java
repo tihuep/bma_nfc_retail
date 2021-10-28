@@ -73,7 +73,7 @@ public class MyPurchasesActivity extends AppCompatActivity {
         purchaseItemDate.setText(date);
 
         TextView purchaseItemTotal = item.findViewById(R.id.purchaseItemTotal);
-        purchaseItemTotal.setText(currency + " " + total.toString());
+        purchaseItemTotal.setText(currency + total.toString());
 
         item.setContentDescription(id);
 
@@ -83,6 +83,7 @@ public class MyPurchasesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PurchaseService.myCurrentPurchase = new Purchase(id, PurchasePaymentService.testUser, null);
+                PurchaseService.myCurrentPurchasDate = date;
                 PurchaseService.getItemsOfPurchase(that, id);
 
                 //Intent intent = new Intent(that, ShowPurchaseActivity.class);

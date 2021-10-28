@@ -26,8 +26,9 @@ public class ShowPurchaseActivity extends AppCompatActivity {
     TextView showPurchaseDate;
     ScrollView showPurchaseScrollView;
     LinearLayout showPurchaseItems;
-    TextView showPurchaseTotalLabel;
     TextView showPurchaseTotal;
+
+    Float total = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +40,13 @@ public class ShowPurchaseActivity extends AppCompatActivity {
         showPurchaseDate = findViewById(R.id.showPurchaseDate);
         showPurchaseScrollView = findViewById(R.id.showPurchaseScrollView);
         showPurchaseItems = findViewById(R.id.showPurchaseItems);
-        showPurchaseTotalLabel = findViewById(R.id.showPurchaseTotalLabel);
         showPurchaseTotal = findViewById(R.id.showPurchaseTotal);
 
+        showPurchaseDate.setText(PurchaseService.myCurrentPurchasDate);
+
+        setTotal();
+
         defineButtonHandlers();
-/*
-        Bundle extras = getIntent().getExtras();
-        showPurchaseDate.setText(extras.getString("date"));
-        showPurchaseTotal.setText(extras.getString("currency") + " " + extras.getFloat("total"));
-*//*
-        addItem("1", 6, "fishermans friend eucalyptus", 3f);
-        addItem("2", 5, "fishermans friend mint", 3.5f);
-        addItem("3", 4, "fishermans friend cassis", 5f);
-        addItem("4", 1, "fishermans friend", 4f);
-        addItem("5", 2, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);
-        addItem("6", 1, "fishermans friend", 3f);*/
 
         if (PurchaseService.myCurrentPurchase.getItems() != null) {
             for (Map.Entry<Article, Integer> item : PurchaseService.myCurrentPurchase.getItems().entrySet()) {
@@ -78,14 +70,21 @@ public class ShowPurchaseActivity extends AppCompatActivity {
         View item =  layoutInflater.inflate(R.layout.article_list_item, null);
 
         TextView articleItemAmount = item.findViewById(R.id.articleItemAmount);
-        articleItemAmount.setText(amount.toString() + " ");
+        articleItemAmount.setText(amount.toString() + "* ");
 
         TextView articleItemDesc = item.findViewById(R.id.articleItemDesc);
         articleItemDesc.setText(desc);
 
         TextView articleItemPrice = item.findViewById(R.id.articleItemPrice);
-        articleItemPrice.setText("CHF " + price.toString());
+        Float multipliedPrice = price * amount;
+        articleItemPrice.setText(getResources().getString(R.string.purchase_chf) + multipliedPrice.toString());
 
         showPurchaseItems.addView(item);
+        total += multipliedPrice;
+        setTotal();
+    }
+
+    public void setTotal() {
+        showPurchaseTotal.setText(getResources().getString(R.string.show_purchase_total_label) + total.toString());
     }
 }

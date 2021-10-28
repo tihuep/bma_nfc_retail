@@ -23,6 +23,7 @@ import ch.bmz.bma.nfc_retail_android.Model.User;
 public class PurchasePaymentService {
     public static Purchase currentPurchase;
     public static PaymentMethod currentPaymentMethod;
+    public static Float currentTotal;
     public static User testUser = new User("69", "Timon", "Hüppi", "timon.hueppi@gmail.com", "");
 
     public static void postPurchase(PaymentConfirmActivity context) {
@@ -94,7 +95,7 @@ public class PurchasePaymentService {
                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(dt);
 
-        PaymentRequest paymentRequest = new PaymentRequest(null, 0f, "CHF", true, currentTime, currentPurchase.getId(), currentPaymentMethod.getId());
+        PaymentRequest paymentRequest = new PaymentRequest(null, currentTotal, "CHF", true, currentTime, currentPurchase.getId(), currentPaymentMethod.getId());
         String requestBodyStr = gson.toJson(paymentRequest);
         WebProvider.doRequest(new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
