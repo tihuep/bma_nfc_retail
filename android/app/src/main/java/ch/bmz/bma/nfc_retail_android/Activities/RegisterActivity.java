@@ -13,7 +13,9 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ch.bmz.bma.nfc_retail_android.Model.User;
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 /**
  * author: Timon Hueppi
@@ -75,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateForm()) {
+                    UserService.register(that, new User(null, registerFirstnameInput.getText().toString(), registerLastnameInput.getText().toString(), registerEmailInput.getText().toString(), registerPWConfirmInput.getText().toString()));
                     hideError();
                     setResult(RESULT_OK, new Intent());
                     Intent intent = new Intent(that, PurchaseActivity.class);

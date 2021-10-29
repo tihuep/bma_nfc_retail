@@ -1,6 +1,6 @@
 package ch.bmz.bma.nfc_retail_android.Service;
 
-import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,7 +30,7 @@ public class PurchasePaymentService {
     public static void postPurchase(PaymentConfirmActivity context) {
         String url = "http://bma.timonhueppi.ch:8080/purchases";
         Gson gson = new Gson();
-        PurchaseRequest purchaseRequest = new PurchaseRequest(null, testUser.getId(), null);
+        PurchaseRequest purchaseRequest = new PurchaseRequest(null, currentUser.getId(), null);
         String requestBodyStr = gson.toJson(purchaseRequest);
         WebProvider.doRequest(new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

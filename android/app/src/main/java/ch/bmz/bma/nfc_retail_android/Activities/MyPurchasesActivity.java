@@ -1,6 +1,6 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
-import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -84,7 +84,7 @@ public class MyPurchasesActivity extends AppCompatActivity {
         purchaseItemSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PurchaseService.myCurrentPurchase = new Purchase(id, testUser, null);
+                PurchaseService.myCurrentPurchase = new Purchase(id, currentUser, null);
                 PurchaseService.myCurrentPurchasDate = date;
                 PurchaseService.getItemsOfPurchase(that, id);
 

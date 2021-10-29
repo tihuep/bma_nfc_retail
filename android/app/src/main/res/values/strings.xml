@@ -61,6 +61,7 @@
 
 
     <string name="preference_file_key_purchase_items">ch.bmz.bma.nfc_retail_android.purchase_items</string>
+    <string name="preference_file_key_user">ch.bmz.bma.nfc_retail_android.user</string>
 
 
     <string name="internet_error">Verbindungsprobleme sind aufgetreten</string>

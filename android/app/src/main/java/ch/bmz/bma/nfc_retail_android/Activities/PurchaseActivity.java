@@ -1,6 +1,6 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
-import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +31,7 @@ import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.R;
 import ch.bmz.bma.nfc_retail_android.Service.ArticleService;
 import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
+import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -78,7 +79,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 Intent intent = new Intent(that, PaymentActivity.class);
                 startActivity(intent);
 
-                PurchasePaymentService.currentPurchase = new Purchase(null, testUser, that.items);
+                PurchasePaymentService.currentPurchase = new Purchase(null, currentUser, that.items);
                 PurchasePaymentService.currentTotal = total;
             }
         });
@@ -100,6 +101,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 purchaseProfileSpinner.setSelection(0);
                 break;
             case 3:
+                UserService.logout(this);
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

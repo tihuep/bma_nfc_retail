@@ -1,6 +1,6 @@
 package ch.bmz.bma.nfc_retail_android.Service;
 
-import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
 
 import android.content.Intent;
 
@@ -34,7 +34,7 @@ public class PurchaseService {
     public static Purchase myCurrentPurchase;
     public static String myCurrentPurchasDate;
     public static void getPurchasesOfUser(MyPurchasesActivity context) {
-        String url = "http://bma.timonhueppi.ch:8080/purchases/user/" + testUser.getId();
+        String url = "http://bma.timonhueppi.ch:8080/purchases/user/" + currentUser.getId();
 
         WebProvider.doRequest(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
