@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 public class ChangePWActivity extends AppCompatActivity {
 
@@ -61,9 +62,9 @@ public class ChangePWActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateForm()) {
-                    //TODO: change pw on the server
-                    hideError();
-                    finish();
+                    UserService.changePW(that, changePWNewConfInput.getText().toString());
+                    /*hideError();
+                    finish();*/
                 }else {
                     //TODO: implement proper error messages
                     displayError("Bitte die Felder korrekt ausfüllen");

@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.bmz.bma.nfc_retail_android.Activities.ChangePWActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.LoginActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.RegisterActivity;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
@@ -162,5 +163,37 @@ public class UserService {
                 return requestBodyStr == null ? null : requestBodyStr.getBytes(StandardCharsets.UTF_8);
             }
         }, context);*/
+    }
+
+    public static void changePW(ChangePWActivity context, String newPW){
+        String url = "http://bma.timonhueppi.ch:8080/users/" + currentUser.getId();
+        Gson gson = new Gson();
+        UserRequest JsonUser = new UserRequest(currentUser.getId(), currentUser.getFirstname(), currentUser.getLastname(), currentUser.getEmail(), newPW);
+        String requestBodyStr = gson.toJson(JsonUser);
+        WebProvider.doRequest(new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                UserRequest userRequest = gson.fromJson(response, UserRequest.class);
+                currentUser.setPassword(userRequest.getPassword());
+                context.hideError();
+                context.finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+            }
+        }) {
+            //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return requestBodyStr == null ? null : requestBodyStr.getBytes(StandardCharsets.UTF_8);
+            }
+        }, context);
     }
 }
