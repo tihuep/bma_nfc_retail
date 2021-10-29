@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
+const authenticationApi = require('./authentication/AuthenticationApi')
 const articleApi = require('./article/ArticleApi');
 const paymentMethodApi = require('./payment_method/PaymentMethodApi');
 const userApi = require('./user/UserApi');
@@ -11,6 +12,7 @@ const paymentApi = require('./payment/PaymentApi');
 
 app.use(express.json());
 
+app.use('/', authenticationApi);
 app.use('/articles', articleApi);
 app.use('/payment_methods', paymentMethodApi);
 app.use('/users', userApi);
