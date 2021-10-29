@@ -61,13 +61,11 @@ public class ChangePWActivity extends AppCompatActivity {
         changePWButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: add validation from server of current pw
                 if (validateForm()) {
                     UserService.changePW(that, changePWNewConfInput.getText().toString());
-                    /*hideError();
-                    finish();*/
                 }else {
-                    //TODO: implement proper error messages
-                    displayError("Bitte die Felder korrekt ausfüllen");
+                    displayError(getString(R.string.invalid_pw));
                 }
             }
         });
@@ -78,7 +76,6 @@ public class ChangePWActivity extends AppCompatActivity {
     }
 
     private boolean validateCurrentPW() {
-        //TODO: implement validation from server
         return changePWCurrentInput.getText().toString().length() > 5 &&
                 changePWCurrentInput.getText().toString().length() < 255;
     }

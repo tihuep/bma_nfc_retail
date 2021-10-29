@@ -62,7 +62,7 @@
         <ScrollView
             android:id="@+id/purchaseItemsScrollView"
             android:layout_width="match_parent"
-            android:layout_height="550dp">
+            android:layout_height="530dp">
 
             <LinearLayout
                 android:id="@+id/purchaseItems"
@@ -103,6 +103,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/purchase_pay" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/purchaseError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/purchaseErrorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000" />
+
         </LinearLayout>
 
     </LinearLayout>

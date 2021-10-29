@@ -29,6 +29,8 @@ public class MyPurchasesActivity extends AppCompatActivity {
 
     Button myPurchasesBack;
     TextView myPurchasesTitle;
+    LinearLayout myPurchasesError;
+    TextView myPurchasesErrorLabel;
     ScrollView myPurchasesScrollView;
     LinearLayout myPurchasesItems;
 
@@ -39,21 +41,15 @@ public class MyPurchasesActivity extends AppCompatActivity {
 
         myPurchasesBack = findViewById(R.id.myPurchasesBack);
         myPurchasesTitle = findViewById(R.id.myPurchasesTitle);
+        myPurchasesError = findViewById(R.id.myPurchasesError);
+        myPurchasesErrorLabel = findViewById(R.id.myPurchaseErrorLabel);
         myPurchasesScrollView = findViewById(R.id.myPurchasesScrollView);
         myPurchasesItems = findViewById(R.id.myPurchasesItems);
 
         defineButtonHandlers();
 
-        /*addItem("1", "01.10.2021", "CHF", 1.00f);
-        addItem("2", "02.10.2021", "CHF", 2f);
-        addItem("3", "03.10.2021", "CHF", 3f);
-        addItem("4", "04.10.2021", "CHF", 4f);
-        addItem("5", "05.10.2021", "CHF", 5f);
-        addItem("6", "06.10.2021", "CHF", 6f);
-        addItem("7", "07.10.2021", "CHF", 7f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);
-        addItem("8", "08.10.2021", "CHF", 10.69f);*/
+        hideError();
+
         PurchaseService.getPurchasesOfUser(this);
     }
 
@@ -87,13 +83,6 @@ public class MyPurchasesActivity extends AppCompatActivity {
                 PurchaseService.myCurrentPurchase = new Purchase(id, currentUser, null);
                 PurchaseService.myCurrentPurchasDate = date;
                 PurchaseService.getItemsOfPurchase(that, id);
-
-                //Intent intent = new Intent(that, ShowPurchaseActivity.class);
-                /*intent.putExtra("id", id);
-                intent.putExtra("date", date);
-                intent.putExtra("currency", currency);
-                intent.putExtra("total", total);*/
-                //startActivity(intent);
             }
         });
 
@@ -110,5 +99,15 @@ public class MyPurchasesActivity extends AppCompatActivity {
                 myPurchasesItems.removeView(view);
             }
         }
+    }
+
+    public void displayError(String message) {
+        myPurchasesError.setVisibility(View.VISIBLE);
+        myPurchasesErrorLabel.setText(message);
+    }
+
+    public void hideError() {
+        myPurchasesError.setVisibility(View.GONE);
+        myPurchasesErrorLabel.setText("");
     }
 }

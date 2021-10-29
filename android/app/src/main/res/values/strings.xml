@@ -65,4 +65,13 @@
 
 
     <string name="internet_error">Verbindungsprobleme sind aufgetreten</string>
+    <string name="wrong_pw">Falsche Email oder Passwort</string>
+    <string name="duplicate_email">Diese Email-Adresse existiert bereits</string>
+    <string name="invalid_email">Bitte eine gültige Email-Adresse angeben</string>
+    <string name="invalid_name">Bitte gültige Namen angeben</string>
+    <string name="invalid_pw">Bitte gültiges Passwort angeben (mind. 6 Zeichen)</string>
+    <string name="sth_went_wrong">Etwas ist schiefgelaufen, überprüfen Sie ihre Eingaben</string>
+    <string name="no_payment_method">Bitte Zahlmethode auswählen</string>
+    <string name="no_purchase_items">Der Warenkorb ist noch leer, bitte füllen</string>
+
 </resources>

@@ -30,6 +30,7 @@ import ch.bmz.bma.nfc_retail_android.Model.PaymentMethod;
 import ch.bmz.bma.nfc_retail_android.Model.PaymentRequest;
 import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.Model.PurchaseRequest;
+import ch.bmz.bma.nfc_retail_android.R;
 
 public class PurchaseService {
     public static Purchase myCurrentPurchase;
@@ -67,7 +68,7 @@ public class PurchaseService {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                            context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
                     }){
                         @Override
@@ -116,7 +117,7 @@ public class PurchaseService {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                            context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
                     }){
                         @Override

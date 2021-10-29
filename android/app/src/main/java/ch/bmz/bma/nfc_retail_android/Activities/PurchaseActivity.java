@@ -43,6 +43,8 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
     LinearLayout purchaseItems;
     TextView purchaseTotal;
     Button purchasePay;
+    LinearLayout purchaseError;
+    TextView purchaseErrorLabel;
 
     Map<Article, Integer> items = new HashMap<>();
     Float total = 0f;
@@ -58,11 +60,15 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchaseItems = findViewById(R.id.purchaseItems);
         purchaseTotal = findViewById(R.id.purchaseTotal);
         purchasePay = findViewById(R.id.purchasePay);
+        purchaseError = findViewById(R.id.purchaseError);
+        purchaseErrorLabel = findViewById(R.id.purchaseErrorLabel);
 
         defineButtonHandlers();
         populateSpinner();
 
         setTotal();
+
+        hideError();
 
         SharedPreferences sharedPreferences = getSharedPreferences(
                 getString(R.string.preference_file_key_purchase_items), Context.MODE_PRIVATE);
@@ -78,11 +84,17 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
         purchasePay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(that, PaymentActivity.class);
-                startActivity(intent);
+                if (items.size() > 0) {
+                    hideError();
+                    Intent intent = new Intent(that, PaymentActivity.class);
+                    startActivity(intent);
 
-                PurchasePaymentService.currentPurchase = new Purchase(null, currentUser, that.items);
-                PurchasePaymentService.currentTotal = total;
+                    PurchasePaymentService.currentPurchase = new Purchase(null, currentUser, that.items);
+                    PurchasePaymentService.currentTotal = total;
+                }else{
+                    displayError(getString(R.string.no_purchase_items));
+                }
+
             }
         });
         purchaseProfileSpinner.setOnItemSelectedListener(this);
@@ -213,5 +225,15 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
 
     public void setTotal(){
         purchaseTotal.setText(getResources().getString(R.string.purchase_total) + total.toString());
+    }
+
+    public void displayError(String message) {
+        purchaseError.setVisibility(View.VISIBLE);
+        purchaseErrorLabel.setText(message);
+    }
+
+    public void hideError() {
+        purchaseError.setVisibility(View.GONE);
+        purchaseErrorLabel.setText("");
     }
 }

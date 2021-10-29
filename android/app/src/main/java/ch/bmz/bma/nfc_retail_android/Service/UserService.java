@@ -81,7 +81,11 @@ public class UserService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                if (error.networkResponse.statusCode == 500) {
+                    context.displayError(context.getString(R.string.duplicate_email));
+                }else {
+                    context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                }
             }
         }) {
             //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
@@ -118,7 +122,11 @@ public class UserService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                if (error.networkResponse.statusCode == 400 || error.networkResponse.statusCode == 500) {
+                    context.displayError(context.getString(R.string.wrong_pw));
+                }else{
+                    context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
+                }
             }
         }) {
             //https://stackoverflow.com/questions/48424033/android-volley-post-request-with-json-object-in-body-and-getting-response-in-str/48424181
@@ -141,7 +149,7 @@ public class UserService {
     }
 
     public static void changePW(ChangePWActivity context, String newPW){
-        String url = "http://bma.timonhueppi.ch:8080/users/" + currentUser.getId();
+        String url = "http://bma.timonhueppi.ch:8080/users/" + currentUser.getId() + "/password";
         Gson gson = new Gson();
         UserRequest JsonUser = new UserRequest(currentUser.getId(), currentUser.getFirstname(), currentUser.getLastname(), currentUser.getEmail(), newPW);
         String requestBodyStr = gson.toJson(JsonUser);

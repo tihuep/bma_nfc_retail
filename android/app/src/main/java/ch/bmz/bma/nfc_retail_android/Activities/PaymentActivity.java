@@ -83,7 +83,7 @@ public class PaymentActivity extends AppCompatActivity {
                         editor.apply();
                     }
                 }else {
-                    displayError("Bitte Zahlmethode auswählen");
+                    displayError(getString(R.string.no_payment_method));
                 }
             }
         });

@@ -79,8 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (validateForm()) {
                     UserService.register(that, new User(null, registerFirstnameInput.getText().toString(), registerLastnameInput.getText().toString(), registerEmailInput.getText().toString(), registerPWConfirmInput.getText().toString()));
                 }else {
-                    //TODO: implement proper error messages
-                    displayError("Bitte die Felder korrekt ausfüllen");
+                    displayError(!validateEmail() ? getString(R.string.invalid_email) : !validateName() ? getString(R.string.invalid_name) : !validatePassword() ? getString(R.string.invalid_pw) : getString(R.string.sth_went_wrong));
                 }
             }
         });
