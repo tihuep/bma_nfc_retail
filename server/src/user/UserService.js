@@ -24,8 +24,8 @@ async function insert(user) {
 }
 
 function update(user) {
-    return query('UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?',
-        user.first_name, user.last_name, user.email, user.password, user.id)
+    return query('UPDATE user SET first_name = ?, last_name = ?, email = ? WHERE id = ?',
+        user.first_name, user.last_name, user.email, user.id)
         .then(() => findById(user.id), err => reject(err));
 }
 
