@@ -12,7 +12,10 @@ function query(queryString, ...queryParams) {
     return new Promise((resolve, reject) => {
         const sql = mysql.format(queryString, queryParams);
         connection.query(sql, (err, result) => {
-            if (err) return reject(err);
+            if (err) {
+                console.error(err);
+                return reject(err);
+            }
             resolve(result);
         })
     })

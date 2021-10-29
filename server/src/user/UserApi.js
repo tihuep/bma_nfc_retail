@@ -10,20 +10,12 @@ router.get('/:id', (request, response) => {
     service.findById(request.params.id).then(result => response.json(result));
 })
 
-router.post('/', (request, response) => {
-    service.insert(request.body).then(result => response.json(result));
-})
-
 router.put('/:id', (request, response) => {
-    service.update(request.body).then(result => response.json(result));
+    service.update(request.body).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.delete('/:id', (request, response) => {
-    service.deleteById(request.params.id).then(result => response.json(result));
-})
-
-router.post('/login', (request, response) => {
-    service.login(request.body).then(result => response.json(result));
+    service.deleteById(request.params.id).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 module.exports = router;
