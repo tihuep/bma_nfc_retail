@@ -14,13 +14,12 @@ function findByEmail(email) {
     return query('SELECT * FROM user WHERE email = ?', email).then(result => result[0]);
 }
 
-function insert(user) {
+async function insert(user) {
     const id = user.id ? user.id : uuidV4();
-    return bcrypt.hash(user.password, 10, (err, hash) => {
-        query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
-            id, user.first_name, user.last_name, user.email, hash);
-        return findById(id);
-    });
+    const hashedPassword = await bcrypt.hash(user.password, 10)
+    query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
+        id, user.first_name, user.last_name, user.email, hashedPassword);
+    return findById(id);
 }
 
 function update(user) {
