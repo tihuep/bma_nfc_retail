@@ -1,10 +1,13 @@
 package ch.bmz.bma.nfc_retail_android.Service;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+
+import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.Activities.PurchaseActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.ScanActivity;
@@ -26,7 +29,12 @@ public class ArticleService {
             public void onErrorResponse(VolleyError error) {
                 //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
-        }), context);
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return WebProvider.addAuthHeader();
+            }
+        }, context);
     }
 
     public static void getArticleForScan(ScanActivity context, Article articleNeeded) {
@@ -44,6 +52,11 @@ public class ArticleService {
             public void onErrorResponse(VolleyError error) {
                 //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
-        }), context);
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return WebProvider.addAuthHeader();
+            }
+        }, context);
     }
 }

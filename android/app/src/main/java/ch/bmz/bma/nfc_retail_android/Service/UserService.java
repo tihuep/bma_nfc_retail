@@ -94,18 +94,6 @@ public class UserService {
             public byte[] getBody() throws AuthFailureError {
                 return requestBodyStr == null ? null : requestBodyStr.getBytes(StandardCharsets.UTF_8);
             }
-/*
-            //https://stackoverflow.com/a/46229554
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                String credentials = "username:password";
-                String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-                headers.put("Accept", "application/json");
-                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", auth);
-                return headers;
-            }*/
         }, context);
     }
 
@@ -181,6 +169,10 @@ public class UserService {
             @Override
             public byte[] getBody() throws AuthFailureError {
                 return requestBodyStr == null ? null : requestBodyStr.getBytes(StandardCharsets.UTF_8);
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return WebProvider.addAuthHeader();
             }
         }, context);
     }

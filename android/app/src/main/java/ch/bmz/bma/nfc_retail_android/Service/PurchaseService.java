@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import ch.bmz.bma.nfc_retail_android.Activities.MyPurchasesActivity;
 import ch.bmz.bma.nfc_retail_android.Activities.PaymentConfirmActivity;
@@ -68,7 +69,12 @@ public class PurchaseService {
                         public void onErrorResponse(VolleyError error) {
                             //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
-                    }), context);
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            return WebProvider.addAuthHeader();
+                        }
+                    }, context);
                 }
             }
         }, new Response.ErrorListener() {
@@ -76,7 +82,12 @@ public class PurchaseService {
             public void onErrorResponse(VolleyError error) {
                 //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
-        }), context);
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return WebProvider.addAuthHeader();
+            }
+        }, context);
     }
 
     public static void getItemsOfPurchase(MyPurchasesActivity context, String purchaseId) {
@@ -107,7 +118,12 @@ public class PurchaseService {
                         public void onErrorResponse(VolleyError error) {
                             //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
                         }
-                    }), context);
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            return WebProvider.addAuthHeader();
+                        }
+                    }, context);
                 }
                 if (items.size() == 0){
                     Intent intent = new Intent(context, ShowPurchaseActivity.class);
@@ -119,6 +135,11 @@ public class PurchaseService {
             public void onErrorResponse(VolleyError error) {
                 //context.displayError(context.getString(R.string.internet_error) + ": " + error.toString());
             }
-        }), context);
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return WebProvider.addAuthHeader();
+            }
+        }, context);
     }
 }
