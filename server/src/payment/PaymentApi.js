@@ -4,31 +4,31 @@ const service = require('./PaymentService');
 const authService = require('../authentication/AuthenticationService');
 
 router.get('/', authService.authenticateToken, (request, response) => {
-    service.findAll().then(result => response.json(result));
+    service.findAll().then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.get('/:id', authService.authenticateToken, (request, response) => {
-    service.findById(request.params.id).then(result => response.json(result));
+    service.findById(request.params.id).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.get('/purchase/:purchase_id', authService.authenticateToken, (request, response) => {
-    service.findByPurchaseId(request.params.purchase_id).then(result => response.json(result));
+    service.findByPurchaseId(request.params.purchase_id).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.post('/', authService.authenticateToken, (request, response) => {
-    service.insert(request.body).then(result => response.json(result));
+    service.insert(request.body).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.put('/:id', authService.authenticateToken, (request, response) => {
-    service.update(request.body).then(result => response.json(result));
+    service.update(request.body).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.delete('/:id', authService.authenticateToken, (request, response) => {
-    service.deleteById(request.params.id).then(result => response.json(result));
+    service.deleteById(request.params.id).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 router.post('/:id/confirm', authService.authenticateToken, (request, response) => {
-    service.confirmPaymentById(request.params.id).then(result => response.json(result));
+    service.confirmPaymentById(request.params.id).then(result => response.json(result), () => response.sendStatus(500));
 })
 
 module.exports = router;

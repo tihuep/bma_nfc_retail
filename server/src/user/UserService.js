@@ -29,6 +29,12 @@ function update(user) {
         .then(() => findById(user.id), err => reject(err));
 }
 
+async function changePassword(user) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    return query('UPDATE user SET password = ? WHERE id = ?', hashedPassword, user.id)
+        .then(() => findById(user.id), err => reject(err));
+}
+
 function deleteById(id) {
     const user = findById(id);
     return query('DELETE FROM user WHERE id = ?', id)
@@ -41,5 +47,6 @@ module.exports = {
     findByEmail,
     insert,
     update,
+    changePassword,
     deleteById
 }
