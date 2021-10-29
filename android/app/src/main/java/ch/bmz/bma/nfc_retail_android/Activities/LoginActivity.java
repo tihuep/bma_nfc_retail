@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ch.bmz.bma.nfc_retail_android.R;
+import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 /**
  * author: Timon Hueppi
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO: check credentials
+                UserService.login(that, loginEmailInput.getText().toString(), loginPWInput.getText().toString());
                 Intent intent = new Intent(that, PurchaseActivity.class);
                 startActivity(intent);
                 finish();
