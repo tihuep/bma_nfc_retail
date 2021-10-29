@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const service = require('./PaymentMethodService');
+const authService = require('../authentication/AuthenticationService');
 
-router.get('/', (request, response) => {
+router.get('/', authService.authenticateToken, (request, response) => {
     service.findAll().then(result => response.json(result));
 });
 
-router.get('/:id', (request, response) => {
+router.get('/:id', authService.authenticateToken, (request, response) => {
     service.findById(request.params.id).then(result => response.json(result));
 });
 
