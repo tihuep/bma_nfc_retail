@@ -1,6 +1,7 @@
 const {query} = require("../DatabaseConnector");
 const {v4: uuidV4} = require("uuid")
 const bcrypt = require("bcrypt");
+const {reject} = require("bcrypt/promises");
 
 function findAll() {
     return query('SELECT * FROM user');
@@ -16,28 +17,28 @@ function findByEmail(email) {
 
 async function insert(user) {
     const id = user.id ? user.id : uuidV4();
-    const hashedPassword = await bcrypt.hash(user.password, 10)
-    query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
-        id, user.first_name, user.last_name, user.email, hashedPassword);
-    return findById(id);
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    return query('INSERT INTO user (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
+        id, user.first_name, user.last_name, user.email, hashedPassword)
+        .then(() => findById(id), err => reject(err));
 }
 
 function update(user) {
-    query('UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?',
-        user.first_name, user.last_name, user.email, user.password, user.id);
-    return findById(user.id);
+    return query('UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?',
+        user.first_name, user.last_name, user.email, user.password, user.id)
+        .then(() => findById(user.id), err => reject(err));
+}
+
+async function changePassword(user) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    return query('UPDATE user SET password = ? WHERE id = ?', hashedPassword, user.id)
+        .then(() => findById(user.id), err => reject(err));
 }
 
 function deleteById(id) {
     const user = findById(id);
-    query('DELETE FROM user WHERE id = ?', id);
-    return user;
-}
-
-function login(user) {
-    return query('SELECT password FROM user WHERE email = ?', user.email).then(result => {
-        return result[0].password === user.password;
-    });
+    return query('DELETE FROM user WHERE id = ?', id)
+        .then(() => user, err => reject(err));
 }
 
 module.exports = {
@@ -46,6 +47,6 @@ module.exports = {
     findByEmail,
     insert,
     update,
-    deleteById,
-    login
+    changePassword,
+    deleteById
 }

@@ -15,7 +15,7 @@ router.post('/register', async (request, response) => {
             token,
             user: result
         })
-    });
+    }, () => response.sendStatus(500));
 })
 
 router.post('/login', async (request, response) => {

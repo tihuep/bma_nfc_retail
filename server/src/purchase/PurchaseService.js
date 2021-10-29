@@ -2,10 +2,6 @@ const {query} = require("../DatabaseConnector");
 const {v4: uuidV4} = require("uuid")
 const articlePurchaseService = require("../article_purchase/ArticlePurchaseService")
 
-function findAll() {
-    return query('SELECT * FROM purchase');
-}
-
 function findAllByUserId(user_id) {
     return query('SELECT * FROM purchase WHERE user_id = ?', user_id)
 }
