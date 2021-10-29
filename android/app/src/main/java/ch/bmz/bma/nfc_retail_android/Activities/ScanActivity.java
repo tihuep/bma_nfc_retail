@@ -1,5 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -25,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import ch.bmz.bma.nfc_retail_android.Model.Article;
 import ch.bmz.bma.nfc_retail_android.R;
 import ch.bmz.bma.nfc_retail_android.Service.ArticleService;
+import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 public class ScanActivity extends AppCompatActivity {
 
@@ -69,6 +72,14 @@ public class ScanActivity extends AppCompatActivity {
         scanError.setVisibility(View.GONE);
 
         defineButtonHandlers();
+
+        UserService.getUserFromSP(this);
+        if (currentUser == null){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {

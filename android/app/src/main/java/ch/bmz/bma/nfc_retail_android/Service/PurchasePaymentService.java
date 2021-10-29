@@ -63,6 +63,11 @@ public class PurchasePaymentService {
                         public byte[] getBody() throws AuthFailureError {
                             return requestBodyStrItem == null ? null : requestBodyStrItem.getBytes(StandardCharsets.UTF_8);
                         }
+
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            return WebProvider.addAuthHeader();
+                        }
                     }, context);
 
                 }

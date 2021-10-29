@@ -1,6 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
 import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUser;
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.currentUserToken;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +32,7 @@ import ch.bmz.bma.nfc_retail_android.Model.Purchase;
 import ch.bmz.bma.nfc_retail_android.R;
 import ch.bmz.bma.nfc_retail_android.Service.ArticleService;
 import ch.bmz.bma.nfc_retail_android.Service.PurchasePaymentService;
+import ch.bmz.bma.nfc_retail_android.Service.PurchaseService;
 import ch.bmz.bma.nfc_retail_android.Service.UserService;
 
 public class PurchaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
