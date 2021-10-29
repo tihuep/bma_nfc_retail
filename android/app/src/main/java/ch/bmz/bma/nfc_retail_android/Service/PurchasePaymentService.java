@@ -1,5 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Service;
 
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,7 +26,6 @@ public class PurchasePaymentService {
     public static Purchase currentPurchase;
     public static PaymentMethod currentPaymentMethod;
     public static Float currentTotal;
-    public static User testUser = new User("69", "Timon", "Hüppi", "timon.hueppi@gmail.com", "");
 
     public static void postPurchase(PaymentConfirmActivity context) {
         String url = "http://bma.timonhueppi.ch:8080/purchases";

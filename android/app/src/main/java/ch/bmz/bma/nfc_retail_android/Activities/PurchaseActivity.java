@@ -1,5 +1,7 @@
 package ch.bmz.bma.nfc_retail_android.Activities;
 
+import static ch.bmz.bma.nfc_retail_android.Service.UserService.testUser;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -76,7 +78,7 @@ public class PurchaseActivity extends AppCompatActivity implements AdapterView.O
                 Intent intent = new Intent(that, PaymentActivity.class);
                 startActivity(intent);
 
-                PurchasePaymentService.currentPurchase = new Purchase(null, PurchasePaymentService.testUser, that.items);
+                PurchasePaymentService.currentPurchase = new Purchase(null, testUser, that.items);
                 PurchasePaymentService.currentTotal = total;
             }
         });
