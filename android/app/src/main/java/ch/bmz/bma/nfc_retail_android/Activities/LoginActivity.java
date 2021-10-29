@@ -53,11 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity that = this;
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO: check credentials
                 UserService.login(that, loginEmailInput.getText().toString(), loginPWInput.getText().toString());
-                Intent intent = new Intent(that, PurchaseActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
         loginRegisterButton.setOnClickListener(new View.OnClickListener() {

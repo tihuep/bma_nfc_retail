@@ -78,11 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validateForm()) {
                     UserService.register(that, new User(null, registerFirstnameInput.getText().toString(), registerLastnameInput.getText().toString(), registerEmailInput.getText().toString(), registerPWConfirmInput.getText().toString()));
-                    hideError();
-                    setResult(RESULT_OK, new Intent());
-                    Intent intent = new Intent(that, PurchaseActivity.class);
-                    startActivity(intent);
-                    finish();
                 }else {
                     //TODO: implement proper error messages
                     displayError("Bitte die Felder korrekt ausfüllen");
