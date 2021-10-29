@@ -34,7 +34,6 @@ function deleteById(id) {
 }
 
 module.exports = {
-    findAll,
     findAllByUserId,
     findById,
     insert,
